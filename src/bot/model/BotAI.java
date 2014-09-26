@@ -44,7 +44,7 @@ public class BotAI
 			if(userInput.equals("what is your name"))
 			{
 				
-				responce = "My name is chatBot. Do you want to talk about stuff?";
+				responce = "My name is " + botName + " Do you want to talk about stuff?";
 				
 			}
 			else if(userInput.equals("what do you like to do"))
@@ -187,5 +187,15 @@ public class BotAI
 		
 		return botName;
 		
+	}
+	
+	public String getBotFavFood()
+	{
+		return botFavFood;
+	}
+	
+	public String getBotFavColor()
+	{
+		return botFavColor;
 	}
 }
