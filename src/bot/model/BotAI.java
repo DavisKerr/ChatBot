@@ -18,23 +18,36 @@ public class BotAI
 	private int chatCount;
 	private Random rand;
 	private int botData;
+	private String userName;
 	
 	//constructor section:
-	public BotAI()
+	/**
+	 * 
+	 * Finds creates the bot's name to be used throughout the program. 
+	 * @param botName
+	 */
+	public BotAI(String botName)
 	{
-		chatCount = 0;
-		rand = new Random();
+		this.botName = botName;
 	}
 	
 	//method section:
-	public void BotFirstReply(String name)
+	/**
+	 *  The method that takes the name given by the BeginConversation method in the BotView class.
+	 * @param userName
+	 */
+	public void BotFirstReply(String userName)
 	{
-		
-		responce = "Well, Hello " + name;
+		this.userName = userName;
+		responce = "Well, Hello " + userName;
 		topic = "introductions";
 		updateChatCount();
 	}
 	
+	/**
+	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. See the getResponce method. 
+	 * @param userInput
+	 */
 	public void botReply(String userInput)
 	{
 		
@@ -89,80 +102,11 @@ public class BotAI
 		
 	}
 	
-	private void decideBotData()
-	{
-		
-		botData = rand.nextInt(5) + 1;
-		
-		if(botData == 1)
-		{
-			botName = "Steve";
-		}
-		else if(botData == 2)
-		{
-			botName = "ChatBot2000";
-		}
-		else if(botData == 3)
-		{
-			botName = "Thor";
-		}
-		else if(botData == 4)
-		{
-			botName = "Rex";
-		}
-		else
-		{
-			botName = "Pig of doom";
-		}
-		
-		botData = rand.nextInt(5) + 1;
-		
-		if(botData == 1)
-		{
-			botFavColor = "Red";
-		}
-		else if(botData == 2)
-		{
-			botFavColor = "Blue";
-		}
-		else if(botData == 3)
-		{
-			botFavColor = "Orange";
-		}
-		else if(botData == 4)
-		{
-			botFavColor = "Green";
-		}
-		else
-		{
-			botFavColor = "Puce";
-		}
-		
-		botData = rand.nextInt(5) + 1;
-		
-		if(botData == 1)
-		{
-			botFavFood = "Pizza";
-		}
-		else if(botData == 2)
-		{
-			botFavFood = "Apples";
-		}
-		else if(botData == 3)
-		{
-			botFavFood = "Pasta";
-		}
-		else if(botData == 4)
-		{
-			botFavFood = "Chinese food";
-		}
-		else
-		{
-			botFavFood = "Dog meat";
-		}
-		
-	}
 	
+	/**
+	 * updates the chat count
+	 * 
+	 */
 	private void updateChatCount()
 	{
 		
@@ -174,28 +118,24 @@ public class BotAI
 		
 	
 	//getter section:
-	
+	/**
+	 * returns responce to the BotAppController
+	 * @return responce
+	 */
 	public String getResponce()
 	{
 		
 		return responce;
 		
 	}
-	
+	/**
+	 * returns the botName to the BotAppController
+	 * @return botName
+	 */
 	public String getBotName()
 	{
 		
 		return botName;
 		
-	}
-	
-	public String getBotFavFood()
-	{
-		return botFavFood;
-	}
-	
-	public String getBotFavColor()
-	{
-		return botFavColor;
 	}
 }

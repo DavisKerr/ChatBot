@@ -15,10 +15,10 @@ public class BotView
 	private BotAppController baseController;
 	
 	//constructor section:
-	public BotView(BotAppController baseController)
+	
+	public BotView()
 	{
 		
-		this.baseController = baseController;
 		
 	}
 	//method section:
