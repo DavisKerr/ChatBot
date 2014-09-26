@@ -44,7 +44,7 @@ public class BotAppController
 			{
 				quit();
 			}
-			appAI.botReply(input);
+			appAI.BotReply(input);
 			responce = appAI.getResponce();
 			
 		}

@@ -52,53 +52,14 @@ public class BotAI
 	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. See the getResponce method. 
 	 * @param userInput Uses the input provided in BotView.
 	 */
-	public void botReply(String userInput)
+	public void BotReply(String userInput)
 	{
 		
 		this.userInput = userInput;
-		if(userInput.equals(""))
-		{
-			if(userInput.equals("what is your name"))
-			{
-				
-				responce = "My name is " + botName + " Do you want to talk about stuff?";
-				topic = "changeTopic";
-			}
-			else if(userInput.equals("what do you like to do"))
-			{
-				
-				responce = "I'm a computer program... I dont like to do anything. What do you like to do?";
-				topic = "Change topic";
-				
-			}
-			else
-			{
-				
-				
-				
-			}
-			
-		}
-		else if(topic.equals("activities"))
+		if(userInput.contains("what is your name"))
 		{
 			
-			if(userInput.equals("swimming"))
-			{
-				
-				
-				
-			}
-			
-		}
-		else if(userInput.equals("what do you like to do"))
-		{
-			responce = "I'm a computer program... I dont like to do anything. What do you like to do?";
-			topic = "activities";
-		}
-		else
-		{
-			
-			responce = "I wasn't programmed to know what " + userInput + " is.";
+			responce = "My name is " + botName + ". How are you?";
 			
 		}
 		
