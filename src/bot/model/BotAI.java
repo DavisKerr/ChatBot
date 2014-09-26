@@ -4,7 +4,11 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-
+/**
+ * Decides what to reply based on the input and topic.
+ * @author Davis Kerr
+ *@version 1
+ */
 public class BotAI
 {
 	
@@ -24,7 +28,7 @@ public class BotAI
 	/**
 	 * 
 	 * Finds creates the bot's name to be used throughout the program. 
-	 * @param botName
+	 * @param botName Creates the bot with an AI
 	 */
 	public BotAI(String botName)
 	{
@@ -34,7 +38,7 @@ public class BotAI
 	//method section:
 	/**
 	 *  The method that takes the name given by the BeginConversation method in the BotView class.
-	 * @param userName
+	 * @param userName Collects the userName to be used throughout the method/class
 	 */
 	public void BotFirstReply(String userName)
 	{
@@ -46,25 +50,25 @@ public class BotAI
 	
 	/**
 	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. See the getResponce method. 
-	 * @param userInput
+	 * @param userInput Uses the input provided in BotView.
 	 */
 	public void botReply(String userInput)
 	{
 		
 		this.userInput = userInput;
-		if(topic.equals("introductions"))
+		if(userInput.equals(""))
 		{
 			if(userInput.equals("what is your name"))
 			{
 				
 				responce = "My name is " + botName + " Do you want to talk about stuff?";
-				
+				topic = "changeTopic";
 			}
 			else if(userInput.equals("what do you like to do"))
 			{
 				
 				responce = "I'm a computer program... I dont like to do anything. What do you like to do?";
-				topic = "activities";
+				topic = "Change topic";
 				
 			}
 			else
@@ -137,5 +141,13 @@ public class BotAI
 		
 		return botName;
 		
+	}
+	/**
+	 * returns the chatCount to the BotAppController
+	 * @return chatCount
+	 */
+	public int getChatCount()
+	{
+		return chatCount;
 	}
 }
