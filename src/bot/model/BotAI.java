@@ -26,6 +26,7 @@ public class BotAI
 	private int botData;
 	private String userName;
 	private String lastResponce;
+	private String mood;
 	
 	//constructor section:
 	/**
@@ -33,9 +34,10 @@ public class BotAI
 	 * Finds creates the bot's name to be used throughout the program. 
 	 * @param botName Creates the bot with an AI
 	 */
-	public BotAI(String botName)
+	public BotAI(String botName, String mood)
 	{
 		this.botName = botName;
+		this.mood = mood;
 	}
 	
 	//method section:
@@ -59,56 +61,85 @@ public class BotAI
 	{
 		
 		this.userInput = userInput;
-		if(userInput.contains("what is your name") || userInput.equals("whats your name"))
+		if(mood.equals("good"))
 		{
-			
-			responce = "My name is " + botName + ". How are you?";
-			lastResponce = "How are you?";
-			
-		}
-		else if(userInput.equals("good") || userInput.equals("i am good"))
-		{
-			
-			if(lastResponce.equals("How are you?"))
-			{
-				
-				responce = "Thats Great! What do you like to do?";
-				lastResponce = "What do you like to do?";
-				
-			}
-			
-		}
-		else if(userInput.contains("hi") || userInput.contains("hello")) 
-		{
-			
-			if(lastResponce.equals("introductions"))
-			{
-				
-				responce = "HI! Are you going to ask me my name?";
-				lastResponce = "My name";
-				
-			}
-			
-			
-		}
-		else if(userInput.contains("yes") || userInput.equals("Yes"))
-		{
-			
-			if(lastResponce.equals("My name"))
+			if(userInput.contains("what is your name") || userInput.equals("whats your name"))
 			{
 				
 				responce = "My name is " + botName + ". How are you?";
 				lastResponce = "How are you?";
+				
 			}
-			
-		}
-		else if(userInput.equals("no") || userInput.equals("No"))
-		{
-			if(lastResponce.equals("My name"))
+			else if(userInput.equals("good") || userInput.equals("i am good"))
 			{
-				responce = "Your mean!";
-				lastResponce = "Your mean!";
+				
+				if(lastResponce.equals("How are you?"))
+				{
+					
+					responce = "Thats Great! What do you like to do?";
+					lastResponce = "What do you like to do?";
+					
+				}
+				
 			}
+			else if(userInput.contains("hi") || userInput.contains("hello")) 
+			{
+				
+				if(lastResponce.equals("introductions"))
+				{
+					
+					responce = "HI! Are you going to ask me my name?";
+					lastResponce = "My name";
+					
+				}
+				
+				
+			}
+			else if(userInput.contains("yes") || userInput.equals("Yes"))
+			{
+				
+				if(lastResponce.equals("My name"))
+				{
+					
+					responce = "My name is " + botName + ". How are you?";
+					lastResponce = "How are you?";
+				}
+				
+			}
+			else if(userInput.equals("no") || userInput.equals("No"))
+			{
+				if(lastResponce.equals("My name"))
+				{
+					responce = "Your mean!";
+					lastResponce = "Your mean!";
+				}
+			}
+			else if(userInput.equals("what do you like to do"))
+			{
+				responce = "Thanks for asking! I like to process 1s and 0s to create complex interactive programs. What do you like to do?";
+				lastResponce = "What do you like to do?";
+			}
+			else if(userInput.equals("i like to bike") || userInput.equals("i like biking") || userInput.equals("biking"))
+			{
+				if(lastResponce.equals("What do you like to do?"))
+				{
+					responce = "Biking is awesome! Do you mountain bike or road bike?";
+					lastResponce = "What kind of biking";
+				}
+			}
+			else if(userInput.equals("ok") || userInput.equals("OK"))
+			{
+				if(lastResponce.equals("Your mean!"))
+				{
+					responce = "I just got very mad at you all of the sudden!";
+					lastResponce = "Mad!";
+					mood = "Mad";
+				}
+			}
+		}
+		else if(mood.equals("mad"))
+		{
+			responce = "       ";
 		}
 		
 		updateChatCount();

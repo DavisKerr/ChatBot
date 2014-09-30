@@ -21,7 +21,7 @@ public class BotAppController
 	{
 		
 		appView = new BotView();
-		appAI = new BotAI("ChatBot");
+		appAI = new BotAI("ChatBot", "good");
 	}
 	
 	// method section:
@@ -34,13 +34,12 @@ public class BotAppController
 		name = appView.getName();
 		
 		appAI.BotFirstReply(name);
-		responce = appAI.getResponce(); 
+		responce = appAI.getResponce();
 		while(isRunning == true)
 		{
 			
 			appView.continueConversation(responce); 
 			input = appView.getInput();
-			
 			if(input.equals("quit"))
 			{
 				quit();
