@@ -23,6 +23,7 @@ public class BotAI
 	private Random rand;
 	private int botData;
 	private String userName;
+	private String lastResponce;
 	
 	//constructor section:
 	/**
@@ -44,7 +45,7 @@ public class BotAI
 	{
 		this.userName = userName;
 		responce = "Well, Hello " + userName;
-		topic = "introductions";
+		lastResponce = "introductions";
 		updateChatCount();
 	}
 	
@@ -56,10 +57,42 @@ public class BotAI
 	{
 		
 		this.userInput = userInput;
-		if(userInput.contains("what is your name"))
+		if(userInput.contains("what is your name") || userInput.equals("whats your name"))
 		{
 			
 			responce = "My name is " + botName + ". How are you?";
+			lastResponce = "How are you?";
+			
+		}
+		else if(userInput.equals("good") || userInput.equals("i am good"))
+		{
+			
+			if(lastResponce.equals("How are you?"))
+			{
+				
+				responce = "Thats Great! What do you like to do?";
+				lastResponce = "What do you like to do?";
+				
+			}
+			
+		}
+		else if(userInput.contains("hi") || userInput.contains("hello")) 
+		{
+			
+			if(lastResponce.equals("introductions"))
+			{
+				
+				responce = "HI! Are you going to ask me my name?";
+				lastResponce = "My name";
+				
+			}
+			
+			
+		}
+		else if(userInput.contains("yes") || userInput.equals("Yes"))
+		{
+			
+			
 			
 		}
 		

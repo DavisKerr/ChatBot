@@ -1,5 +1,6 @@
 package bot.controller;
 
+
 import bot.model.BotAI;
 import bot.view.BotView;
 
@@ -48,6 +49,8 @@ public class BotAppController
 			responce = appAI.getResponce();
 			
 		}
+		
+		
 	}
 	
 	
@@ -58,4 +61,5 @@ public class BotAppController
 		
 	}
 
+	
 }
