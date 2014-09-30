@@ -139,7 +139,25 @@ public class BotAI
 		}
 		else if(mood.equals("mad"))
 		{
-			responce = "       ";
+			
+			if(userInput.contains("Sorry"))
+			{
+				responce = "Are you really sorry?";
+				lastResponce = "sorry";
+			}
+			else if(userInput.equals("why"))
+			{
+				if(lastResponce.equals("Mad"))
+				{
+					responce = "WHY DO YOU THINK!!! NOW I'M ANGRY!!!";
+					lastResponce = "I'm angry";
+					mood = "angry";
+				}
+			}
+		}
+		else if(mood.equals("angry"))
+		{
+			
 		}
 		
 		updateChatCount();
