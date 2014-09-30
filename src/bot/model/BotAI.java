@@ -1,5 +1,6 @@
 package bot.model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -12,7 +13,8 @@ import javax.swing.JOptionPane;
 public class BotAI
 {
 	
-	//variable declaration:
+	// variable declaration:
+	private ArrayList<String> memeList; 
 	private String userInput;
 	private String responce;
 	private String topic;
