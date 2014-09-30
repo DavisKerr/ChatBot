@@ -94,8 +94,21 @@ public class BotAI
 		else if(userInput.contains("yes") || userInput.equals("Yes"))
 		{
 			
+			if(lastResponce.equals("My name"))
+			{
+				
+				responce = "My name is " + botName + ". How are you?";
+				lastResponce = "How are you?";
+			}
 			
-			
+		}
+		else if(userInput.equals("no") || userInput.equals("No"))
+		{
+			if(lastResponce.equals("My name"))
+			{
+				responce = "Your mean!";
+				lastResponce = "Your mean!";
+			}
 		}
 		
 		updateChatCount();
