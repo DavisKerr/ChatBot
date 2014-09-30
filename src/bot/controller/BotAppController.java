@@ -21,7 +21,7 @@ public class BotAppController
 	{
 		
 		appView = new BotView();
-		appAI = new BotAI("ChatBot", "good");
+		appAI = new BotAI("ChatBot", "happy");
 	}
 	
 	// method section:
