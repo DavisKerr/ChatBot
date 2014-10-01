@@ -104,6 +104,12 @@ public class BotAI
 					responce = "My name is " + botName + ". How are you?";
 					lastResponce = "How are you?";
 				}
+				else if(lastResponce.equals("nice bike?"))
+				{
+					responce = "Awesome!! I wish I could ride a bike! Do you play video games?";
+					lastResponce = "play video games?";
+						
+				}
 				
 			}
 			else if(userInput.equals("no") || userInput.equals("No"))
