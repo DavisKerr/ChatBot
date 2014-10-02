@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- *@version 1
+ * @version 1.1 10/2/14
  */
 public class BotAI
 {
@@ -207,6 +207,12 @@ public class BotAI
 		
 	}
 	
+	private void memeCheck(String userInput)
+	{
+		
+		
+		
+	}
 	
 		
 	

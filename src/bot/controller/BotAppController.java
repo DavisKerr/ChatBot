@@ -1,9 +1,16 @@
 package bot.controller;
 
 
+import javax.swing.JOptionPane;
+
 import bot.model.BotAI;
 import bot.view.BotView;
 
+/**
+ * Runs the project. Gathers data from the BotAI and the BotView.
+ * @author Davis Kerr
+ * @version 1.2 10/2/14
+ */
 
 public class BotAppController
 {
@@ -15,6 +22,7 @@ public class BotAppController
 	private BotAI appAI;
 	private String responce;
 	private String name;
+	private String closeMessage;
 	
 	// constructor section:
 	public BotAppController()
@@ -29,33 +37,38 @@ public class BotAppController
 	{
 		isRunning = true;
 		
-		appView.beginConversation();
-		
-		name = appView.getName();
-		
-		appAI.BotFirstReply(name);
-		responce = appAI.getResponce();
-		while(isRunning == true)
+		while(isRunning = true)
 		{
-			
-			appView.continueConversation(responce); 
-			input = appView.getInput();
-			if(input.equals("quit"))
+			appView.beginConversation();
+			name = appView.getName();
+			appAI.BotFirstReply(name);
+			if(name.equals("quit"))
 			{
 				quit();
 			}
-			appAI.BotReply(input);
 			responce = appAI.getResponce();
-			
+			while(isRunning == true)
+			{
+				
+				appView.continueConversation(responce); 
+				input = appView.getInput();
+				if(input.equals("quit"))
+				{
+					quit();
+				}
+				appAI.BotReply(input);
+				responce = appAI.getResponce();
+				
+			}
 		}
-		
 		
 	}
 	
 	
 	private void quit()
 	{
-		
+		closeMessage = "DON'T KILL ME!!!";
+		appView.showMessage(closeMessage);
 		System.exit(0);
 		
 	}
