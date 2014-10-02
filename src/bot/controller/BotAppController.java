@@ -37,30 +37,24 @@ public class BotAppController
 	{
 		isRunning = true;
 		
-		while(isRunning = true)
+		while(input != "quit")
 		{
 			appView.beginConversation();
 			name = appView.getName();
 			appAI.BotFirstReply(name);
-			if(name.equals("quit"))
-			{
-				quit();
-			}
 			responce = appAI.getResponce();
 			while(isRunning == true)
 			{
 				
 				appView.continueConversation(responce); 
 				input = appView.getInput();
-				if(input.equals("quit"))
-				{
-					quit();
-				}
+				
 				appAI.BotReply(input);
 				responce = appAI.getResponce();
 				
 			}
 		}
+		quit();
 		
 	}
 	

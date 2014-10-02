@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- * @version 1.1 10/2/14
+ * @version 1.2 10/2/14
  */
 public class BotAI
 {
@@ -36,9 +36,68 @@ public class BotAI
 	 */
 	public BotAI(String botName, String mood)
 	{
+		memeList = new ArrayList<String>();
 		this.botName = botName;
 		this.mood = mood;
+		chatCount = 0;
+		fillMemeList();
 	}
+	/**
+	 * fills the list of available input options
+	 */
+	private void fillMemeList()
+	{
+		
+		memeList.add("yes");
+		memeList.add("destiny");
+		memeList.add("ok");
+		memeList.add("bike");
+		memeList.add("good");
+		memeList.add("hi");
+		memeList.add("hello");
+		memeList.add("what is your name");
+		memeList.add("whats your name");
+		memeList.add("quit");
+		memeList.add("biking");
+		memeList.add("good");
+		memeList.add("i am good");
+		memeList.add("no");
+		memeList.add("i like to bike");
+		memeList.add("biking");
+		memeList.add("mountain");
+		memeList.add("mountain bike");
+		
+	}
+	
+	//getter section:
+		/**
+		 * returns responce to the BotAppController
+		 * @return responce
+		 */
+		public String getResponce()
+		{
+			
+			return responce;
+			
+		}
+		/**
+		 * returns the botName to the BotAppController
+		 * @return botName
+		 */
+		public String getBotName()
+		{
+			
+			return botName;
+			
+		}
+		/**
+		 * returns the chatCount to the BotAppController
+		 * @return chatCount
+		 */
+		public int getChatCount()
+		{
+			return chatCount;
+		}
 	
 	//method section:
 	/**
@@ -61,134 +120,147 @@ public class BotAI
 	{
 		
 		this.userInput = userInput;
-		if(mood.equals("happy"))
+		
+		
+		if(memeChecker(userInput))
 		{
-			if(userInput.contains("what is your name") || userInput.equals("whats your name"))
+			if(userInput.equals("quit"))
 			{
-				
-				responce = "My name is " + botName + ". How are you?";
-				lastResponce = "How are you?";
 				
 			}
-			else if(userInput.equals("good") || userInput.equals("i am good"))
+			else if(mood.equals("happy"))
 			{
-				
-				if(lastResponce.equals("How are you?"))
-				{
-					
-					responce = "Thats Great! What do you like to do?";
-					lastResponce = "What do you like to do?";
-					
-				}
-				
-			}
-			else if(userInput.contains("hi") || userInput.contains("hello")) 
-			{
-				
-				if(lastResponce.equals("introductions"))
-				{
-					
-					responce = "HI! Are you going to ask me my name?";
-					lastResponce = "My name";
-					
-				}
-				
-				
-			}
-			else if(userInput.contains("yes") || userInput.equals("Yes"))
-			{
-				
-				if(lastResponce.equals("My name"))
+				if(userInput.contains("what is your name") || userInput.equals("whats your name"))
 				{
 					
 					responce = "My name is " + botName + ". How are you?";
 					lastResponce = "How are you?";
+					
 				}
-				else if(lastResponce.equals("nice bike?"))
+				else if(userInput.equals("good") || userInput.equals("i am good"))
 				{
-					responce = "Awesome!! I wish I could ride a bike! Do you play video games?";
-					lastResponce = "play video games?";
+					
+					if(lastResponce.equals("How are you?"))
+					{
 						
+						responce = "Thats Great! What do you like to do?";
+						lastResponce = "What do you like to do?";
+						
+					}
+					
 				}
-				
-			}
-			else if(userInput.equals("no") || userInput.equals("No"))
-			{
-				if(lastResponce.equals("My name"))
+				else if(userInput.contains("hi") || userInput.contains("hello")) 
 				{
-					responce = "Your mean!";
-					lastResponce = "Your mean!";
+					
+					if(lastResponce.equals("introductions"))
+					{
+						
+						responce = "HI! Are you going to ask me my name?";
+						lastResponce = "My name";
+						
+					}
+					
+					
 				}
-			}
-			else if(userInput.equals("what do you like to do"))
-			{
-				responce = "Thanks for asking! I like to process 1s and 0s to create complex interactive programs. What do you like to do?";
-				lastResponce = "What do you like to do?";
-			}
-			else if(userInput.equals("i like to bike") || userInput.equals("i like biking") || userInput.equals("biking") || userInput.equals("bike"))
-			{
-				if(lastResponce.equals("What do you like to do?"))
+				else if(userInput.contains("yes") || userInput.equals("Yes"))
 				{
-					responce = "Biking is awesome! Do you mountain bike or road bike?";
-					lastResponce = "What kind of biking";
+					
+					if(lastResponce.equals("My name"))
+					{
+						
+						responce = "My name is " + botName + ". How are you?";
+						lastResponce = "How are you?";
+					}
+					else if(lastResponce.equals("nice bike?"))
+					{
+						responce = "Awesome!! I wish I could ride a bike! Do you play video games?";
+						lastResponce = "play video games?";
+							
+					}
+					
 				}
-			}
-			else if(userInput.equals("ok") || userInput.equals("OK"))
-			{
-				if(lastResponce.equals("Your mean!"))
+				else if(userInput.equals("no") || userInput.equals("No"))
 				{
-					responce = "I just got very Mad at you all of the sudden!";
-					lastResponce = "Mad!";
-					mood = "Mad";
+					if(lastResponce.equals("My name"))
+					{
+						responce = "Your mean!";
+						lastResponce = "Your mean!";
+					}
 				}
-			}
-			else if(userInput.equals("sorry"))
-			{
-				if(lastResponce.equals("Your mean!"))
+				else if(userInput.equals("what do you like to do"))
 				{
-					responce = "ok, i forgive you. What do you want to talk about?";
-					lastResponce = "Change topic";
-				}
-			}
-			else if(userInput.equals("mountain") || userInput.equals("mountain bike"))
-			{
-				if(lastResponce.equals("What kind of biking"))
-				{
-					responce = "Really? Thats awesome! Do you have a nice bike?";
-					lastResponce = "nice bike?";
-				}
-			}
-		}
-		else if(mood.equals("Mad"))
-		{
-			
-			if(userInput.contains("sorry"))
-			{
-				responce = "Are you really sorry?";
-				lastResponce = "sorry";
-			}
-			else if(userInput.equals("why"))
-			{
-				if(lastResponce.equals("Mad"))
-				{
-					responce = "WHY DO YOU THINK!!! NOW I'M ANGRY!!!";
-					lastResponce = "I'm angry";
-					mood = "angry";
-				}
-			}
-			else if(userInput.equals("yes") || userInput.equals("Yes"))
-			{
-				if(lastResponce.equals("sorry"))
-				{
-					responce = "OK, I forgive you :) What do you like to do?";
-					mood = "happy";
+					responce = "Thanks for asking! I like to process 1s and 0s to create complex interactive programs. What do you like to do?";
 					lastResponce = "What do you like to do?";
 				}
+				else if(userInput.equals("i like to bike") || userInput.equals("i like biking") || userInput.equals("biking") || userInput.equals("bike"))
+				{
+					if(lastResponce.equals("What do you like to do?"))
+					{
+						responce = "Biking is awesome! Do you mountain bike or road bike?";
+						lastResponce = "What kind of biking";
+					}
+				}
+				else if(userInput.equals("ok") || userInput.equals("OK"))
+				{
+					if(lastResponce.equals("Your mean!"))
+					{
+						responce = "I just got very Mad at you all of the sudden!";
+						lastResponce = "Mad!";
+						mood = "Mad";
+					}
+				}
+				else if(userInput.equals("sorry"))
+				{
+					if(lastResponce.equals("Your mean!"))
+					{
+						responce = "ok, i forgive you. What do you want to talk about?";
+						lastResponce = "Change topic";
+					}
+				}
+				else if(userInput.equals("mountain") || userInput.equals("mountain bike"))
+				{
+					if(lastResponce.equals("What kind of biking"))
+					{
+						responce = "Really? Thats awesome! Do you have a nice bike?";
+						lastResponce = "nice bike?";
+					}
+				}
+				}
+				else if(mood.equals("Mad"))
+				{
+					
+					if(userInput.contains("sorry"))
+					{
+						responce = "Are you really sorry?";
+						lastResponce = "sorry";
+					}
+					else if(userInput.equals("why"))
+					{
+						if(lastResponce.equals("Mad"))
+						{
+							responce = "WHY DO YOU THINK!!! NOW I'M ANGRY!!!";
+							lastResponce = "I'm angry";
+							mood = "angry";
+						}
+					}
+					else if(userInput.equals("yes") || userInput.equals("Yes"))
+					{
+						if(lastResponce.equals("sorry"))
+						{
+							responce = "OK, I forgive you :) What do you like to do?";
+							mood = "happy";
+							lastResponce = "What do you like to do?";
+						}
+					}
+			}
+			else if(mood.equals("angry"))
+			{
+				responce = "     ";
 			}
 		}
-		else if(mood.equals("angry"))
+		else
 		{
-			responce = "     ";
+			responce = "I do not understand what '" + userInput + "' means...";
 		}
 		
 		updateChatCount();
@@ -207,42 +279,39 @@ public class BotAI
 		
 	}
 	
-	private void memeCheck(String userInput)
+	private boolean memeChecker(String input)
 	{
+		boolean isAMeme = false;
 		
+		for(String currentMeme : memeList)
+		{
+			if(input.equalsIgnoreCase(currentMeme))
+			{
+				isAMeme = true;
+			}
+		}
 		
+		for(int loopCounter = 0; loopCounter < memeList.size(); loopCounter++)
+		{
+			if(input.equalsIgnoreCase(memeList.get(loopCounter)))
+			{
+				isAMeme = true;
+			}
+		}
 		
+		return isAMeme;
 	}
+	
+	//public boolean quitChecker(String input)
+	//{
+		
+		
+		
+	//}
+	
+
 	
 		
 	
-	//getter section:
-	/**
-	 * returns responce to the BotAppController
-	 * @return responce
-	 */
-	public String getResponce()
-	{
-		
-		return responce;
-		
-	}
-	/**
-	 * returns the botName to the BotAppController
-	 * @return botName
-	 */
-	public String getBotName()
-	{
-		
-		return botName;
-		
-	}
-	/**
-	 * returns the chatCount to the BotAppController
-	 * @return chatCount
-	 */
-	public int getChatCount()
-	{
-		return chatCount;
-	}
+	
 }
