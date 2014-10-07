@@ -27,6 +27,7 @@ public class BotAI
 	private String userName;
 	private String lastResponce;
 	private String mood;
+	public boolean quiting;
 	
 	//constructor section:
 	/**
@@ -119,6 +120,7 @@ public class BotAI
 	public void BotReply(String userInput)
 	{
 		
+		quiting = false;
 		this.userInput = userInput;
 		
 		
@@ -126,7 +128,8 @@ public class BotAI
 		{
 			if(userInput.equals("quit"))
 			{
-				
+				quiting = true;
+				runQuitSequence();
 			}
 			else if(mood.equals("happy"))
 			{
@@ -302,12 +305,12 @@ public class BotAI
 		return isAMeme;
 	}
 	
-	//public boolean quitChecker(String input)
-	//{
+	public boolean runQuitSequence()
+	{
 		
+		return quiting;
 		
-		
-	//}
+	}
 	
 
 	
