@@ -28,7 +28,7 @@ public class BotView
 	}
 	//method section:
 	/**
-	 * Starts the coversation to collect the name.
+	 * Starts the conversation to collect the name.
 	 */
 	public void beginConversation()
 	{

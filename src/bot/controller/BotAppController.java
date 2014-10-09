@@ -25,6 +25,9 @@ public class BotAppController
 	private String closeMessage;
 	
 	// constructor section:
+	/**
+	 * constructs the two other classes.
+	 */
 	public BotAppController()
 	{
 		
@@ -33,6 +36,9 @@ public class BotAppController
 	}
 	
 	// method section:
+	/**
+	 * Directs the entire application
+	 */
 	public void start()
 	{
 		isRunning = true;
