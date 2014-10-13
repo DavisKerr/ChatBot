@@ -64,7 +64,9 @@ public class BotAppController
 		
 	}
 	
-	
+	/**
+	 * exits the program.
+	 */
 	private void quit()
 	{
 		closeMessage = "DON'T KILL ME!!!";

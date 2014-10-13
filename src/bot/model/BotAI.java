@@ -221,7 +221,11 @@ public class BotAI
 		chatCount++;
 		
 	}
-	
+	/**
+	 * Checks if the users input is in the list.
+	 * @param input what the user said
+	 * @return isAMeme can be true or false
+	 */
 	private boolean memeChecker(String input)
 	{
 		boolean isAMeme = false;
@@ -245,6 +249,10 @@ public class BotAI
 		return isAMeme;
 	}
 	
+	/**
+	 * tells the program to quit.
+	 * @return the value of quiting
+	 */
 	public boolean runQuitSequence()
 	{
 		
