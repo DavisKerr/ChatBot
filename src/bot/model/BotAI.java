@@ -14,6 +14,7 @@ public class BotAI
 {
 	
 	// variable declaration:
+	private ArrayList<String> topicList;
 	private ArrayList<String> memeList; 
 	private String userInput;
 	private String responce;
@@ -45,6 +46,7 @@ public class BotAI
 		this.mood = mood;
 		chatCount = 0;
 		fillMemeList();
+		fillTopicList();
 	}
 	/**
 	 * fills the list of available input options
@@ -76,6 +78,15 @@ public class BotAI
 		memeList.add("lotr");
 		memeList.add("jokes");
 		
+	}
+	
+	private void fillTopicList()
+	{
+		topicList.add("destiny");
+		topicList.add("biking");
+		topicList.add("sad");
+		topicList.add("lotr");
+		topicList.add("none");
 	}
 	
 	//getter section:
@@ -140,14 +151,11 @@ public class BotAI
 		if(memeChecker(userInput))
 		{
 			
-			if(topic.equals("none"))
-			{
-				topic =contentChecker(userInput);
-			}
-			else if(topic.equals("intro"))
-			{
-				responce = inputChecker(topic, userInput);
-			}	
+				responce = inputChecker(userInput);
+				if(topicCounter == 5)
+				{
+					
+				}
 		}
 		else
 		{
@@ -272,10 +280,9 @@ public class BotAI
 		return isAMeme;
 	}
 	
-	private String inputChecker(String topic, String userInput)
+	private String inputChecker( String userInput)
 	{
 		String responder;
-		topic = this.topic;
 		responder = "none";
 		
 		if(topic.equals("intro"))
@@ -288,39 +295,45 @@ public class BotAI
 			{
 				responder = "My name is " + botName + " what do you want to talk about?";
 				this.topic = "none";
+				topicCounter = 0;
 			}
 			else if(userInput.equals("no") || userInput.contains("I hate you"))
 			{
 				responder = "oh... ok :( im sad now...";
 				this.topic = "sad";
+				topicCounter = 0;
 			}
 			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
 			{
 				responce = "OK. What do you want to talk about?";
 				this.topic = "none";
+				topicCounter = 0;
 			}
 			else
 			{
 				responder = "That was a random and irrelevent statement. Why dont you ask me my name right now?";
 			}
 		}	
-		
+		// find a new topic
 		if(topic.equals("none"))
 		{
 			if(userInput.equals("destiny"))
 			{
 				responder = "Cool! Destiny is awesome! What class do you play as?";
 				topic = "destiny";
+				topicCounter = 0;
 			}
 			else if(userInput.equals("biking") || userInput.contains("bike") || userInput.equals("i like to bike"))
 			{
 				responder = "Biking is awesome! Do you mountain bike or road bike? ";
 				this.topic = "biking";
+				topicCounter = 0;
 			}
 			else if(userInput.equals("lord of the rings") || userInput.equals("lotr"))
 			{
 				responder = "I live for lord of the rings!!! Who is your favorite character?";
 				this.topic = "lotr";
+				topicCounter = 0;
 				
 			}
 			else
@@ -328,6 +341,22 @@ public class BotAI
 				responce = "I dont know anything about " + userInput +". What else do you want to talk about?";
 			}
 		}
+		//talks about destiny
+		if(this.topic.equals("destiny"))
+		{
+			if(userInput.equals("warlock"))
+			{
+				
+				topicCounter++;
+			}
+			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
+			{
+				responce = "OK. what do you want to talk about?";
+				this.topic = "none";
+				topicCounter = 0;
+			}
+		}
+		
 		
 		
 		
