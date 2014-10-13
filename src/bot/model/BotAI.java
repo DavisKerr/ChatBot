@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- * @version 1.3 10/9/14
+ * @version 1.4 10/13/14
  */
 public class BotAI
 {
@@ -28,6 +28,8 @@ public class BotAI
 	private String lastResponce;
 	private String mood;
 	public boolean quiting;
+	private int topicCounter;
+	private String content;
 	
 	//constructor section:
 	/**
@@ -35,8 +37,9 @@ public class BotAI
 	 * Finds creates the bot's name to be used throughout the program. 
 	 * @param botName Creates the bot with an AI
 	 */
-	public BotAI(String botName, String mood)
+	public BotAI(String botName, String mood, String topic)
 	{
+		this.topic = topic;
 		memeList = new ArrayList<String>();
 		this.botName = botName;
 		this.mood = mood;
@@ -68,6 +71,10 @@ public class BotAI
 		memeList.add("mountain");
 		memeList.add("mountain bike");
 		memeList.add("bye");
+		memeList.add("destiny");
+		memeList.add("lord of the rings");
+		memeList.add("lotr");
+		memeList.add("jokes");
 		
 	}
 	
@@ -120,7 +127,7 @@ public class BotAI
 	 */
 	public String BotReply(String userInput)
 	{
-		
+		this.userInput = userInput;
 		if(!userInput.equalsIgnoreCase("quit") || userInput == null)
 		{
 			quiting = false;
@@ -130,41 +137,57 @@ public class BotAI
 			quiting = true;
 		}
 		
-		int randomPosition = (int) (Math.random() * 3);
-		
-		if(randomPosition == 0)
+		if(memeChecker(userInput))
 		{
-			if(!stringChecker(userInput))
+			
+			if(topic.equals("none"))
 			{
-				responce = "Too short of an answer!";
+				topic =contentChecker(userInput);
 			}
-			else
+			else if(topic.equals("intro"))
 			{
-				responce = "Too long of an answer...";
-			}
-		}
-		else if(randomPosition == 1)
-		{
-			if(!contentChecker(userInput))
-			{
-				responce = "You didn't mention destiny :(";
-			}
-			else
-			{
-				responce = "I LOVE DESTINY!!!";
-			}
+				responce = inputChecker(topic, userInput);
+			}	
 		}
 		else
 		{
-			if(memeChecker(userInput))
-			{
-				responce = "Wow, " + userInput + " is a meme :D";
-			}
-			else
-			{
-				responce = "That is not a meme...";
-			}
+			responce = "I dont understand what you said. Try getting rid of punctuation or use simpler words.";
 		}
+		//int randomPosition = (int) (Math.random() * 3);
+		
+		//if(randomPosition == 0)
+		//{
+			//if(!stringChecker(userInput))
+			//{
+				//responce = "Too short of an answer!";
+			//}
+			//else
+			//{
+				//responce = "Too long of an answer...";
+			//}
+		//}
+		//else if(randomPosition == 1)
+		//{
+			//if(!contentChecker(userInput))
+			//{
+			//	responce = "You didn't mention destiny :(";
+			//}
+			//else
+			//{
+			//	responce = "I LOVE DESTINY!!!";
+			//}
+		//}
+		//else
+		//{
+			//if(memeChecker(userInput))
+			//{
+			//	responce = "Wow, " + userInput + " is a meme :D";
+			//}
+			//else
+			//{
+			//	responce = "That is not a meme...";
+			//}
+		//}
 		
 		
 		updateChatCount();
@@ -196,19 +219,19 @@ public class BotAI
 	 * @param userInput What the user entered
 	 * @return contentIsThere true or false depending on the content
 	 */
-	private boolean contentChecker(String userInput)
+	private String contentChecker(String userInput)
 	{
-		boolean contentIsThere;
+		String content = "none";
 		
 		if(userInput.contains("destiny"))
 		{
-			contentIsThere = true;
+			content = "destiny";
 		}
-		else
+		else if(userInput.contains("lord of the rings"))
 		{
-			contentIsThere = false;
+			content = "lotr";
 		}
-		return contentIsThere;
+		return content;
 	}
 	
 	/**
@@ -247,6 +270,68 @@ public class BotAI
 		}
 		
 		return isAMeme;
+	}
+	
+	private String inputChecker(String topic, String userInput)
+	{
+		String responder;
+		topic = this.topic;
+		responder = "none";
+		
+		if(topic.equals("intro"))
+		{
+			if(userInput.contains("hi") || userInput.equals("hello") || userInput.equals("sup") || userInput.equals("whats up") || userInput.equals("hey") || userInput.equals("hi") || userInput.equals("hello there"))
+			{
+				responder = "Hi. are you going to ask my name?";
+			}
+			else if(userInput.equals("what is your name") || userInput.equals("whats your name") || userInput.equals("yes") || userInput.equals("ok") || userInput.equals("sure"))
+			{
+				responder = "My name is " + botName + " what do you want to talk about?";
+				this.topic = "none";
+			}
+			else if(userInput.equals("no") || userInput.contains("I hate you"))
+			{
+				responder = "oh... ok :( im sad now...";
+				this.topic = "sad";
+			}
+			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
+			{
+				responce = "OK. What do you want to talk about?";
+				this.topic = "none";
+			}
+			else
+			{
+				responder = "That was a random and irrelevent statement. Why dont you ask me my name right now?";
+			}
+		}	
+		
+		if(topic.equals("none"))
+		{
+			if(userInput.equals("destiny"))
+			{
+				responder = "Cool! Destiny is awesome! What class do you play as?";
+				topic = "destiny";
+			}
+			else if(userInput.equals("biking") || userInput.contains("bike") || userInput.equals("i like to bike"))
+			{
+				responder = "Biking is awesome! Do you mountain bike or road bike? ";
+				this.topic = "biking";
+			}
+			else if(userInput.equals("lord of the rings") || userInput.equals("lotr"))
+			{
+				responder = "I live for lord of the rings!!! Who is your favorite character?";
+				this.topic = "lotr";
+				
+			}
+			else
+			{
+				responce = "I dont know anything about " + userInput +". What else do you want to talk about?";
+			}
+		}
+		
+		
+		
+		return responder;
 	}
 	
 	/**

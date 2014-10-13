@@ -20,7 +20,9 @@ public class BotView
 	private BotAppController baseController;
 	
 	//constructor section:
-	
+	/**
+	 * Blank constructor.
+	 */
 	public BotView()
 	{
 		

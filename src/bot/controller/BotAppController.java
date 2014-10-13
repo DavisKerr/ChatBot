@@ -32,7 +32,7 @@ public class BotAppController
 	{
 		
 		appView = new BotView();
-		appAI = new BotAI("ChatBot", "happy");
+		appAI = new BotAI("ChatBot", "happy", "intro");
 	}
 	
 	// method section:
