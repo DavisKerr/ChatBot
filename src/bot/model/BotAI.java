@@ -42,6 +42,7 @@ public class BotAI
 	{
 		this.topic = topic;
 		memeList = new ArrayList<String>();
+		topicList = new ArrayList<String>();
 		this.botName = botName;
 		this.mood = mood;
 		chatCount = 0;
@@ -77,6 +78,18 @@ public class BotAI
 		memeList.add("lord of the rings");
 		memeList.add("lotr");
 		memeList.add("jokes");
+		memeList.add("change topic");
+		memeList.add("lets change the topic");
+		memeList.add("lets talk about something else");
+		memeList.add("funny");
+		memeList.add("tell me a joke");
+		memeList.add("entertain me");
+		memeList.add("nope");
+		memeList.add("my name is");
+		memeList.add("you are a robot");
+		memeList.add("your dumb");
+		memeList.add("i hate you");
+		memeList.add("");
 		
 	}
 	
@@ -87,6 +100,7 @@ public class BotAI
 		topicList.add("sad");
 		topicList.add("lotr");
 		topicList.add("none");
+		
 	}
 	
 	//getter section:
@@ -150,11 +164,14 @@ public class BotAI
 		
 		if(memeChecker(userInput))
 		{
-			
-				responce = inputChecker(userInput);
+				
 				if(topicCounter == 5)
 				{
-					
+					responce = changeTopic(topicList);
+				}
+				else
+				{
+					responce = inputChecker(userInput);
 				}
 		}
 		else
@@ -335,6 +352,9 @@ public class BotAI
 				this.topic = "lotr";
 				topicCounter = 0;
 				
+			}else if(userInput.contains("jokes") || userInput.contains("tell me a joke") || userInput.equals("entertain me") || userInput.contains("funny"))
+			{
+				topicCounter = 0;
 			}
 			else
 			{
@@ -357,10 +377,64 @@ public class BotAI
 			}
 		}
 		
+		if(this.topic.equals("lotr"))
+		{
+			if(userInput.equals("gandalf"))
+			{
+				topicCounter++;
+			}
+			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
+			{
+				responce = "OK. What do you want to talk about?";
+				this.topic = "none";
+				topicCounter = 0;
+			}
+		}
+		
+		if(this.topic.equals("biking"))
+		{
+			if(userInput.equals("mountain biking"))
+			{
+				topicCounter++;
+			}
+			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
+			{
+				responce = "OK. What do you want to talk about?";
+				this.topic = "none";
+				topicCounter = 0;
+			}
+		}
+		
 		
 		
 		
 		return responder;
+	}
+	/**
+	 * picks a random item from a list.
+	 * @param sourceList the list to pick from
+	 * @return
+	 */
+	private String chooseRandomFromList(ArrayList<String> sourceList)
+	{
+		String chosenItem;
+		int indexID;
+		
+		indexID = (int)(Math.random() * (sourceList.size() + 1)); 
+		chosenItem = sourceList.get(indexID);
+		return chosenItem;
+	}
+	
+	private String changeTopic(ArrayList<String> sourceList)
+	{
+		topic = "none";
+		String chosenResponce = "none";
+		
+		topic = chooseRandomFromList(sourceList);
+		
+		chosenResponce = "I want to talk about " + topic + " now.";
+		
+		return chosenResponce;
 	}
 	
 	/**
