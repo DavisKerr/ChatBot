@@ -27,6 +27,7 @@ public class BotView
 	{
 		
 		
+		
 	}
 	//method section:
 	/**

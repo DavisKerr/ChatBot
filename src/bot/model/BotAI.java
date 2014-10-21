@@ -89,6 +89,21 @@ public class BotAI
 		memeList.add("you are a robot");
 		memeList.add("your dumb");
 		memeList.add("i hate you");
+		memeList.add("stop");
+		memeList.add("i want to ask a question");
+		memeList.add("who made you");
+		memeList.add("aragorn");
+		memeList.add("frodo");
+		memeList.add("sam");
+		memeList.add("sauron");
+		memeList.add("gimli");
+		memeList.add("legolas");
+		memeList.add("");
+		memeList.add("");
+		memeList.add("");
+		memeList.add("");
+		memeList.add("");
+		memeList.add("");
 		memeList.add("");
 		
 	}

@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 import bot.model.BotAI;
 import bot.view.BotView;
+import bot.view.ChatbotFrame;
 
 /**
  * Runs the project. Gathers data from the BotAI and the BotView.
@@ -23,6 +24,7 @@ public class BotAppController
 	private String responce;
 	private String name;
 	private String closeMessage;
+	private ChatbotFrame appFrame;
 	
 	// constructor section:
 	/**
@@ -30,7 +32,7 @@ public class BotAppController
 	 */
 	public BotAppController()
 	{
-		
+		appFrame = new ChatbotFrame(this);
 		appView = new BotView();
 		appAI = new BotAI("ChatBot", "happy", "intro");
 	}
@@ -43,24 +45,24 @@ public class BotAppController
 	{
 		isRunning = true;
 		
-		while(!appAI.runQuitSequence())
-		{
-			appView.beginConversation();
-			name = appView.getName();
-			appAI.BotFirstReply(name);
-			responce = appAI.getResponce();
-			while(!appAI.runQuitSequence())
-			{
-				
-				appView.continueConversation(responce); 
-				input = appView.getInput();
-				
-				appAI.BotReply(input);
-				responce = appAI.getResponce();
-				
-			}
-		}
-		quit();
+//		while(!appAI.runQuitSequence())
+//		{
+//			appView.beginConversation();
+//			name = appView.getName();
+//			appAI.BotFirstReply(name);
+//			responce = appAI.getResponce();
+//			while(!appAI.runQuitSequence())
+//			{
+//				
+//				appView.continueConversation(responce); 
+//				input = appView.getInput();
+//				
+//				appAI.BotReply(input);
+//				responce = appAI.getResponce();
+//				
+//			}
+//		}
+//		quit();
 		
 	}
 	
