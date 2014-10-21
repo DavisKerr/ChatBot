@@ -45,6 +45,12 @@ public class BotAppController
 	{
 		isRunning = true;
 		
+		while(isRunning)
+		{
+			
+			
+			
+		}
 //		while(!appAI.runQuitSequence())
 //		{
 //			appView.beginConversation();
