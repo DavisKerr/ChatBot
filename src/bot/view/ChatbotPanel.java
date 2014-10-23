@@ -42,13 +42,13 @@ public class ChatbotPanel extends JPanel
 		firstButton = new JButton("Submit Responce");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
-		baseLayout.putConstraint(SpringLayout.NORTH, firstTextField, -250, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -230, SpringLayout.SOUTH, this);
+
 		
 		menuBar = new JMenuBar();
 		chatArea = new JTextArea(5, 20);
 		chatPane = new JScrollPane(chatArea);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatPane, 125, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatPane, 100, SpringLayout.NORTH, this);
+		
 		
 		
 		
@@ -86,6 +86,8 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, firstButton, 126, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 30, SpringLayout.SOUTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -125, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, firstTextField, -250, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -230, SpringLayout.SOUTH, this);
 	}
 
 	private void setupListeners()
@@ -100,6 +102,14 @@ public class ChatbotPanel extends JPanel
 			}
 		});
 		menuItem.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent click)
+			{
+				firstTextField.setText(firstTextField.getText() + "Quit");
+			}
+		});
+		menuItemFive.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent click)
@@ -136,10 +146,10 @@ public class ChatbotPanel extends JPanel
 		actionMenu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
 		menuBar.add(actionMenu);
 		
-//		menuItem = new JMenuItem("High Five");
-//		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, ActionEvent.ALT_MASK));
-//		menuItem.getAccessibleContext().setAccessibleDescription("Gives the chatbot a high five");
-//		actionMenu.add(menuItem);
+		menuItemFive = new JMenuItem("High Five");
+		menuItemFive.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, ActionEvent.ALT_MASK));
+		menuItemFive.getAccessibleContext().setAccessibleDescription("Gives the chatbot a high five");
+		actionMenu.add(menuItemFive);
 		
 	}
 	
