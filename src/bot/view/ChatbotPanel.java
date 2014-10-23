@@ -14,6 +14,8 @@ import bot.controller.BotAppController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,29 +44,28 @@ public class ChatbotPanel extends JPanel
 		firstButton = new JButton("Submit Responce");
 		firstTextField = new JTextField(25);
 		baseLayout = new SpringLayout();
+		
 
 		
 		menuBar = new JMenuBar();
-		chatArea = new JTextArea(5, 20);
+		chatArea = new JTextArea(5, 15);
 		chatPane = new JScrollPane(chatArea);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatPane, 100, SpringLayout.NORTH, this);
+				
 		
 		
 		
-		
-		
+		setupTextBox();
 		setupMenu();
 		setupPanel();
 		setupLayout();
 		setupListeners();
-		setupTextBox();
 	}
 	
 
 	private void setupPanel()
 	{
 
-		this.setBackground(Color.MAGENTA);
+		this.setBackground(Color.GREEN);
 		this.setSize(400, 400);
 		this.setLayout(baseLayout);
 		this.add(firstButton);
@@ -75,30 +76,55 @@ public class ChatbotPanel extends JPanel
 
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 50, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 100, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, chatPane, -110, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, menuBar, 10, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, menuBar, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, firstTextField, -110, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 0, SpringLayout.WEST, chatPane);
-		baseLayout.putConstraint(SpringLayout.NORTH, firstButton, 6, SpringLayout.SOUTH, firstTextField);
-		baseLayout.putConstraint(SpringLayout.WEST, firstButton, 126, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, 30, SpringLayout.SOUTH, firstTextField);
-		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -125, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, firstTextField, -250, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -230, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, -150, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, firstTextField, -224, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, firstTextField, 100, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, firstTextField, -6, SpringLayout.NORTH, firstButton);
+		baseLayout.putConstraint(SpringLayout.WEST, firstButton, 120, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, firstButton, -131, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, firstButton, 65, SpringLayout.SOUTH, chatPane);
+		baseLayout.putConstraint(SpringLayout.NORTH, chatPane, 69, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, chatPane, 100, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatPane, -29, SpringLayout.NORTH, firstTextField);
+		baseLayout.putConstraint(SpringLayout.EAST, chatPane, -110, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, firstTextField, 0, SpringLayout.EAST, chatPane);
+
 	}
 
 	private void setupListeners()
 	{
+		
+		chatArea.addFocusListener(new FocusListener()
+		{
+
+			@Override
+			public void focusGained(FocusEvent focus) 
+			{
+			
+				chatArea.setEditable(false);
+				
+			}
+			
+			@Override
+			public void focusLost(FocusEvent focus)
+			{
+				
+			}
+
+			
+			
+			
+		});
 
 		firstButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent click)
 			{
-				firstTextField.setText(firstTextField.getText() + ":D   " );
+				
+				chatArea.setText(chatArea.getText() + ":D   " );
 			}
 		});
 		menuItem.addActionListener(new ActionListener()
