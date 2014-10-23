@@ -32,7 +32,7 @@ public class BotAppController
 	 */
 	public BotAppController()
 	{
-		appFrame = new ChatbotFrame(this);
+		appFrame = new ChatbotFrame(this); // passes a reference of the controller to the frame, so the GUI can pass on data back.
 		appView = new BotView();
 		appAI = new BotAI("ChatBot", "happy", "intro");
 	}
