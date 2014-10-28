@@ -185,4 +185,9 @@ public class ChatbotPanel extends JPanel
 		this.userInput = userInput;
 		return userInput;
 	}
+	
+	private void quit()
+	{
+		
+	}
 }
