@@ -124,7 +124,8 @@ public class ChatbotPanel extends JPanel
 			public void actionPerformed(ActionEvent click)
 			{
 				
-				chatArea.setText(chatArea.getText() + ":D   " );
+				chatArea.setText(chatArea.getText() + "  " +firstTextField.getText());
+				firstTextField.setText("");
 			}
 		});
 		menuItem.addActionListener(new ActionListener()
