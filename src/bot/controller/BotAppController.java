@@ -82,6 +82,14 @@ public class BotAppController
 		System.exit(0);
 		
 	}
+	
+	public String startProcess(String input)
+	{
+		
+		responce = appAI.BotReply(input);
+		return responce;
+		
+	}
 
 	
 }
