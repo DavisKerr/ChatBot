@@ -49,21 +49,17 @@ public class ChatbotPanel extends JPanel
 		baseLayout = new SpringLayout();
 		chatAreaAI = new JTextArea(5,15);
 		chatpaneAI = new JScrollPane(chatAreaAI);
-		baseLayout.putConstraint(SpringLayout.EAST, chatpaneAI, 332, SpringLayout.WEST, this);
+		
 		
 		
 		
 
 		
 		menuBar = new JMenuBar();
+		baseLayout.putConstraint(SpringLayout.NORTH, chatpaneAI, 41, SpringLayout.NORTH, menuBar);
 		chatAreaUser = new JTextArea(5, 15);
 		chatPaneUser = new JScrollPane(chatAreaUser);
-		baseLayout.putConstraint(SpringLayout.WEST, chatPaneUser, 52, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.EAST, chatPaneUser, -211, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, chatpaneAI, 0, SpringLayout.NORTH, chatPaneUser);
-		baseLayout.putConstraint(SpringLayout.WEST, chatpaneAI, 6, SpringLayout.EAST, chatPaneUser);
-		baseLayout.putConstraint(SpringLayout.NORTH, chatPaneUser, 26, SpringLayout.SOUTH, menuBar);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatPaneUser, -23, SpringLayout.NORTH, firstTextField);
+		
 		
 		
 				
@@ -89,13 +85,6 @@ public class ChatbotPanel extends JPanel
 		this.add(chatPaneUser);
 		this.add(menuBar);
 		this.add(chatpaneAI);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		add(scrollPane);
-		
-		JPanel panel = new JPanel();
-		scrollPane.setViewportView(panel);
 	}
 
 	private void setupLayout()
@@ -110,6 +99,13 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.EAST, firstTextField, -110, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, firstButton, 6, SpringLayout.SOUTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, -150, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, chatpaneAI, 200, SpringLayout.EAST, chatPaneUser);
+		baseLayout.putConstraint(SpringLayout.NORTH, chatPaneUser, 20, SpringLayout.SOUTH, menuBar);
+		baseLayout.putConstraint(SpringLayout.WEST, chatPaneUser, 85, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatPaneUser, -6, SpringLayout.NORTH, firstTextField);
+		baseLayout.putConstraint(SpringLayout.EAST, chatPaneUser, -18, SpringLayout.WEST, chatpaneAI);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatpaneAI, -6, SpringLayout.NORTH, firstTextField);
+		baseLayout.putConstraint(SpringLayout.EAST, chatpaneAI, -86, SpringLayout.EAST, this);
 	}
 
 	private void setupListeners()
@@ -122,7 +118,7 @@ public class ChatbotPanel extends JPanel
 			public void focusGained(FocusEvent focus) 
 			{
 			
-				chatAreaUser.setEditable(false);
+				
 				
 			}
 			
@@ -173,7 +169,11 @@ public class ChatbotPanel extends JPanel
 		
 		chatAreaUser.setLineWrap(true);
 		chatAreaUser.setWrapStyleWord(true);
+		chatAreaUser.setEditable(false);
 		
+		chatAreaAI.setLineWrap(true);
+		chatAreaAI.setWrapStyleWord(true);
+		chatAreaAI.setEditable(false);
 	}
 	
 	private void setupMenu()
@@ -211,7 +211,7 @@ public class ChatbotPanel extends JPanel
 	{
 		
 		textToWrite = baseController.startProcess(userInput);
-		chatAreaUser.setText(chatAreaUser.getText() + textToWrite);
+		chatAreaUser.setText(chatAreaUser.getText() + "n/" + textToWrite);
 		
 	}
 }
