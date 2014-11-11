@@ -8,28 +8,72 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- * @version 1.4 10/13/14
+ * @version 1.5 10/13/14
  */
 public class BotAI
 {
 	
 	// variable declaration:
-	private ArrayList<String> topicList;
+	/**
+	 * An ArrayList that holds all of the available topics.
+	 */
+	private ArrayList<String> topicList; // <type> is a typeCast.
+	/**
+	 * An ArrayList that holds all available inputs.
+	 */
 	private ArrayList<String> memeList; 
+	/**
+	 * An ArrayList that holds all the user inputs.
+	 */
+	private ArrayList<String> userInputList;
+	/**
+	 * What the user typed in.
+	 */
 	private String userInput;
+	/**
+	 * What the computer types in.
+	 */
 	private String responce;
+	/**
+	 * What the current topic is.
+	 */
 	private String topic;
+	/**
+	 * The name of the chatBot.
+	 */
 	private String botName;
+	/**
+	 * The Chatbot's favorite color.
+	 */
+	@SuppressWarnings("unused")
 	private String botFavColor;
-	private String botFavFood;
+	/**
+	 * How many messages the user has sent.
+	 */
 	private int chatCount;
-	private Random rand;
-	private int botData;
+	/**
+	 * The name of the user.
+	 */
 	private String userName;
+	/**
+	 * what the last responce was.
+	 */
 	private String lastResponce;
+	/**
+	 * What the chatbot's mood is.
+	 */
 	private String mood;
+	/**
+	 * Tells the computer if the user wants to quit.
+	 */
 	public boolean quiting;
+	/**
+	 * How long a topic has been discussed.
+	 */
 	private int topicCounter;
+	/**
+	 * to be added.
+	 */
 	private String content;
 	
 	//constructor section:
@@ -43,6 +87,7 @@ public class BotAI
 		this.topic = topic;
 		memeList = new ArrayList<String>();
 		topicList = new ArrayList<String>();
+		userInputList = new ArrayList<String>();
 		this.botName = botName;
 		this.mood = mood;
 		chatCount = 0;
@@ -98,13 +143,13 @@ public class BotAI
 		memeList.add("sauron");
 		memeList.add("gimli");
 		memeList.add("legolas");
-		memeList.add("");
-		memeList.add("");
-		memeList.add("");
-		memeList.add("");
-		memeList.add("");
-		memeList.add("");
-		memeList.add("");
+		memeList.add("gandalf");
+		memeList.add("nothing");
+		memeList.add("bananas");
+		memeList.add("other stuff");
+		memeList.add("other inputs");
+		memeList.add("ug");
+		memeList.add("lugage");
 		
 	}
 	
@@ -168,7 +213,8 @@ public class BotAI
 	public String BotReply(String userInput)
 	{
 		this.userInput = userInput;
-		if(!userInput.equalsIgnoreCase("quit") || userInput == null)
+		userInputList.add(userInput);
+		if(!this.userInput.equalsIgnoreCase("quit") || userInput == null)
 		{
 			quiting = false;
 		}
@@ -180,6 +226,32 @@ public class BotAI
 		if(memeChecker(userInput))
 		{
 				
+			if(chatCount == 0)
+			{
+				responce = "Hi! Whats your name";
+			}
+			else if(chatCount == 1)
+			{
+				
+			}
+			else if(chatCount == 2)
+			{
+				
+			}
+			else if(chatCount == 3)
+			{
+				
+			}
+			else if(chatCount == 4)
+			{
+				
+			}
+			else if(chatCount == 5)
+			{
+				
+			}
+			else
+			{
 				if(topicCounter == 5)
 				{
 					responce = changeTopic(topicList);
@@ -188,12 +260,13 @@ public class BotAI
 				{
 					responce = inputChecker(userInput);
 				}
+			}
 		}
-		else
+		else // This happens when the user entered input that is not in the memeList.
 		{
 			responce = "I dont understand what you said. Try getting rid of punctuation or use simpler words.";
 		}
-		//int randomPosition = (int) (Math.random() * 3);
+		//int randomPosition = (int) (Math.random() * 6);
 		
 		//if(randomPosition == 0)
 		//{
@@ -232,6 +305,22 @@ public class BotAI
 		
 		updateChatCount();
 		return responce;
+	}
+	
+	private boolean usrInputChecker(String userInput)
+	{
+		boolean matchesInput = false;
+		
+		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+		{
+			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
+			{
+				userInputList.remove(loopCount);
+				// the number of items in a list shift down, so I must manually subtract one from the loopCount so it still checks all of the items.
+				loopCount --; //manually sets back the loop count
+			}
+		}
+		return matchesInput;
 	}
 	
 	/**
@@ -316,7 +405,7 @@ public class BotAI
 	{
 		String responder;
 		responder = "none";
-		
+		//checks if the topic is introductions.
 		if(topic.equals("intro"))
 		{
 			if(userInput.contains("hi") || userInput.equals("hello") || userInput.equals("sup") || userInput.equals("whats up") || userInput.equals("hey") || userInput.equals("hi") || userInput.equals("hello there"))
@@ -341,7 +430,7 @@ public class BotAI
 				this.topic = "none";
 				topicCounter = 0;
 			}
-			else
+			else //This happens when the user types in an irrelevant response that is not caught by the memeList.
 			{
 				responder = "That was a random and irrelevent statement. Why dont you ask me my name right now?";
 			}
