@@ -11,7 +11,7 @@ import bot.view.ChatbotFrame;
 /**
  * Runs the project. Gathers data from the BotAI and the BotView.
  * @author Davis Kerr
- * @version 1.2 10/2/14
+ * @version 1.3 10/2/14
  */
 
 public class BotAppController
