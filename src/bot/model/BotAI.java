@@ -75,6 +75,7 @@ public class BotAI
 	 * to be added.
 	 */
 	private String content;
+	private ChatbotUser user;
 	
 	//constructor section:
 	/**
@@ -82,8 +83,9 @@ public class BotAI
 	 * Finds creates the bot's name to be used throughout the program. 
 	 * @param botName Creates the bot with an AI
 	 */
-	public BotAI(String botName, String mood, String topic)
+	public BotAI(String botName, String mood, String topic, ChatbotUser user)
 	{
+		this.user = user;
 		this.topic = topic;
 		memeList = new ArrayList<String>();
 		topicList = new ArrayList<String>();
@@ -150,6 +152,7 @@ public class BotAI
 		memeList.add("other inputs");
 		memeList.add("ug");
 		memeList.add("lugage");
+		memeList.add("Davis");
 		
 	}
 	
@@ -230,23 +233,24 @@ public class BotAI
 			{
 				responce = "Hi! Whats your name";
 			}
-			else if(chatCount == 1)
+			else if(getChatCount() == 1)
+			{
+				user.setName(userInput);
+				responce = "Well hello, " + user.getName() + ". How old are you?";
+			}
+			else if(getChatCount() == 2)
 			{
 				
 			}
-			else if(chatCount == 2)
+			else if(getChatCount() == 3)
 			{
 				
 			}
-			else if(chatCount == 3)
+			else if(getChatCount() == 4)
 			{
 				
 			}
-			else if(chatCount == 4)
-			{
-				
-			}
-			else if(chatCount == 5)
+			else if(getChatCount() == 5)
 			{
 				
 			}
@@ -306,6 +310,7 @@ public class BotAI
 		updateChatCount();
 		return responce;
 	}
+	
 	
 	private boolean usrInputChecker(String userInput)
 	{

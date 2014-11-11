@@ -4,6 +4,7 @@ package bot.controller;
 import javax.swing.JOptionPane;
 
 import bot.model.BotAI;
+import bot.model.ChatbotUser;
 import bot.view.BotView;
 import bot.view.ChatbotFrame;
 
@@ -25,6 +26,7 @@ public class BotAppController
 	private String name;
 	private String closeMessage;
 	private ChatbotFrame appFrame;
+	private ChatbotUser theUser;
 	
 	// constructor section:
 	/**
@@ -34,7 +36,7 @@ public class BotAppController
 	{
 		appFrame = new ChatbotFrame(this); // passes a reference of the controller to the frame, so the GUI can pass on data back.
 		appView = new BotView();
-		appAI = new BotAI("ChatBot", "happy", "intro");
+		appAI = new BotAI("ChatBot", "happy", "intro", theUser);
 	}
 	
 	// method section:
