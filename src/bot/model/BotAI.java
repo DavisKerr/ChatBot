@@ -224,10 +224,34 @@ public class BotAI
 		}
 		else if(getChatCount() == 5)
 		{
+			topic = checkTopic(userInput);
+			
+			if(topic.equals(""))
+			{
+				this.chatCount = 4;
+			}
 			
 		}
 		
 		return responce;		
+	}
+	
+	private String checkTopic(String userInput)
+	{
+		String chosenTopic = "";
+		boolean isATopic = false;
+		for(String currentMeme : topicList)
+		{
+			
+			if(userInput.equalsIgnoreCase(currentMeme))
+			{
+				isATopic = true;
+				chosenTopic = currentMeme;
+			}
+			
+		}
+		
+		return chosenTopic;
 	}
 	
 	/**
