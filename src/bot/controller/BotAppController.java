@@ -30,13 +30,14 @@ public class BotAppController
 	
 	// constructor section:
 	/**
-	 * constructs the two other classes.
+	 * constructs the three other classes.
 	 */
 	public BotAppController()
 	{
+		theUser = new ChatbotUser();
 		appFrame = new ChatbotFrame(this); // passes a reference of the controller to the frame, so the GUI can pass on data back.
 		appView = new BotView();
-		appAI = new BotAI("ChatBot", "happy", "intro", theUser);
+		appAI = new BotAI("ChatBot", "happy", "intro", this.theUser);
 	}
 	
 	// method section:

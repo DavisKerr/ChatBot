@@ -75,6 +75,7 @@ public class BotAI
 	 * to be added.
 	 */
 	private String content;
+	
 	private ChatbotUser user;
 	
 	//constructor section:
@@ -166,48 +167,13 @@ public class BotAI
 		
 	}
 	
-	//getter section:
-		/**
-		 * returns response to the BotAppController
-		 * @return response
-		 */
-		public String getResponce()
-		{
-			
-			return responce;
-			
-		}
 		/**
 		 * returns the botName to the BotAppController
 		 * @return botName
 		 */
-		public String getBotName()
-		{
-			
-			return botName;
-			
-		}
-		/**
-		 * returns the chatCount to the BotAppController
-		 * @return chatCount
-		 */
-		public int getChatCount()
-		{
-			return chatCount;
-		}
+		
 	
 	//method section:
-	/**
-	 *  The method that takes the name given by the BeginConversation method in the BotView class.
-	 * @param userName Collects the userName to be used throughout the method/class
-	 */
-	public void BotFirstReply(String userName)
-	{
-		this.userName = userName;
-		responce = "Well, Hello " + userName;
-		lastResponce = "introductions";
-		updateChatCount();
-	}
 	
 	/**
 	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. 
@@ -217,155 +183,51 @@ public class BotAI
 	{
 		this.userInput = userInput;
 		userInputList.add(userInput);
-		if(!this.userInput.equalsIgnoreCase("quit") || userInput == null)
-		{
-			quiting = false;
-		}
-		else
-		{
-			quiting = true;
-		}
 		
-		if(memeChecker(userInput))
+		if(chatCount < 5)
 		{
-				
-			if(chatCount == 0)
-			{
-				responce = "Hi! Whats your name";
-			}
-			else if(getChatCount() == 1)
-			{
-				user.setName(userInput);
-				responce = "Well hello, " + user.getName() + ". How old are you?";
-			}
-			else if(getChatCount() == 2)
-			{
-				
-			}
-			else if(getChatCount() == 3)
-			{
-				
-			}
-			else if(getChatCount() == 4)
-			{
-				
-			}
-			else if(getChatCount() == 5)
-			{
-				
-			}
-			else
-			{
-				if(topicCounter == 5)
-				{
-					responce = changeTopic(topicList);
-				}
-				else
-				{
-					responce = inputChecker(userInput);
-				}
-			}
+			responce = introductions(userInput);
 		}
-		else // This happens when the user entered input that is not in the memeList.
-		{
-			responce = "I dont understand what you said. Try getting rid of punctuation or use simpler words.";
-		}
-		//int randomPosition = (int) (Math.random() * 6);
-		
-		//if(randomPosition == 0)
-		//{
-			//if(!stringChecker(userInput))
-			//{
-				//responce = "Too short of an answer!";
-			//}
-			//else
-			//{
-				//responce = "Too long of an answer...";
-			//}
-		//}
-		//else if(randomPosition == 1)
-		//{
-			//if(!contentChecker(userInput))
-			//{
-			//	responce = "You didn't mention destiny :(";
-			//}
-			//else
-			//{
-			//	responce = "I LOVE DESTINY!!!";
-			//}
-		//}
-		//else
-		//{
-			//if(memeChecker(userInput))
-			//{
-			//	responce = "Wow, " + userInput + " is a meme :D";
-			//}
-			//else
-			//{
-			//	responce = "That is not a meme...";
-			//}
-		//}
-		
-		
-		updateChatCount();
+	updateChatCount();
 		return responce;
 	}
 	
-	
-	private boolean usrInputChecker(String userInput)
+	private String introductions(String userInput)
 	{
-		boolean matchesInput = false;
+		responce = "";
 		
-		for(int loopCount = 0; loopCount < userInputList.size(); loopCount++)
+		if(getChatCount() == 0)
 		{
-			if(userInput.equalsIgnoreCase(userInputList.get(loopCount)))
-			{
-				userInputList.remove(loopCount);
-				// the number of items in a list shift down, so I must manually subtract one from the loopCount so it still checks all of the items.
-				loopCount --; //manually sets back the loop count
-			}
+			responce = "Hello, my name is ChatBot. Whats your name?";
 		}
-		return matchesInput;
-	}
-	
-	/**
-	 * Checks the length of the string.
-	 * @param userInput What the user typed in.
-	 * @return isLong returns true or false based on the length.
-	 */
-	private boolean stringChecker(String userInput)
-	{
-		boolean isLong;
+		else if(getChatCount() == 1)
+		{
+			user.setName(userInput);
+			responce = "Nice name, " + user.getName() + ". How old are you?";
+		}
+		else if(getChatCount() == 2)
+		{
+			int age = Integer.parseInt(userInput);
+			user.setAge(age);
+			responce = "Cool! Im 10000000 years old! What do you weigh?";
+		}
+		else if(getChatCount() == 3)
+		{
+			double wieght = Double.parseDouble(userInput);
+			user.setWieght(wieght);
+			responce = "I wiegh -0 pounds myself. So whats your favorite food?";
+		}
+		else if(getChatCount() == 4)
+		{
+			user.setFavoriteFood(userInput);
+			responce = "Awesome! I have always wanted to try " + user.getFavoriteFood() + ", but computers cant eat food :( So, do you have a specific thing you want to talk about?";
+		}
+		else if(getChatCount() == 5)
+		{
+			
+		}
 		
-		if(userInput.length() <= 10)
-		{
-			isLong = false;
-		}
-		else
-		{
-			isLong = true;
-		}
-		return isLong;
-	}	
-	
-	/**
-	 * Checks to see if the user talked about specific topics
-	 * @param userInput What the user entered
-	 * @return contentIsThere true or false depending on the content
-	 */
-	private String contentChecker(String userInput)
-	{
-		String content = "none";
-		
-		if(userInput.contains("destiny"))
-		{
-			content = "destiny";
-		}
-		else if(userInput.contains("lord of the rings"))
-		{
-			content = "lotr";
-		}
-		return content;
+		return responce;		
 	}
 	
 	/**
@@ -406,119 +268,6 @@ public class BotAI
 		return isAMeme;
 	}
 	
-	private String inputChecker( String userInput)
-	{
-		String responder;
-		responder = "none";
-		//checks if the topic is introductions.
-		if(topic.equals("intro"))
-		{
-			if(userInput.contains("hi") || userInput.equals("hello") || userInput.equals("sup") || userInput.equals("whats up") || userInput.equals("hey") || userInput.equals("hi") || userInput.equals("hello there"))
-			{
-				responder = "Hi. are you going to ask my name?";
-			}
-			else if(userInput.equals("what is your name") || userInput.equals("whats your name") || userInput.equals("yes") || userInput.equals("ok") || userInput.equals("sure"))
-			{
-				responder = "My name is " + botName + " what do you want to talk about?";
-				this.topic = "none";
-				topicCounter = 0;
-			}
-			else if(userInput.equals("no") || userInput.contains("I hate you"))
-			{
-				responder = "oh... ok :( im sad now...";
-				this.topic = "sad";
-				topicCounter = 0;
-			}
-			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
-			{
-				responce = "OK. What do you want to talk about?";
-				this.topic = "none";
-				topicCounter = 0;
-			}
-			else //This happens when the user types in an irrelevant response that is not caught by the memeList.
-			{
-				responder = "That was a random and irrelevent statement. Why dont you ask me my name right now?";
-			}
-		}	
-		// find a new topic
-		if(topic.equals("none"))
-		{
-			if(userInput.equals("destiny"))
-			{
-				responder = "Cool! Destiny is awesome! What class do you play as?";
-				topic = "destiny";
-				topicCounter = 0;
-			}
-			else if(userInput.equals("biking") || userInput.contains("bike") || userInput.equals("i like to bike"))
-			{
-				responder = "Biking is awesome! Do you mountain bike or road bike? ";
-				this.topic = "biking";
-				topicCounter = 0;
-			}
-			else if(userInput.equals("lord of the rings") || userInput.equals("lotr"))
-			{
-				responder = "I live for lord of the rings!!! Who is your favorite character?";
-				this.topic = "lotr";
-				topicCounter = 0;
-				
-			}else if(userInput.contains("jokes") || userInput.contains("tell me a joke") || userInput.equals("entertain me") || userInput.contains("funny"))
-			{
-				topicCounter = 0;
-			}
-			else
-			{
-				responce = "I dont know anything about " + userInput +". What else do you want to talk about?";
-			}
-		}
-		//talks about destiny
-		if(this.topic.equals("destiny"))
-		{
-			if(userInput.equals("warlock"))
-			{
-				
-				topicCounter++;
-			}
-			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
-			{
-				responce = "OK. what do you want to talk about?";
-				this.topic = "none";
-				topicCounter = 0;
-			}
-		}
-		
-		if(this.topic.equals("lotr"))
-		{
-			if(userInput.equals("gandalf"))
-			{
-				topicCounter++;
-			}
-			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
-			{
-				responce = "OK. What do you want to talk about?";
-				this.topic = "none";
-				topicCounter = 0;
-			}
-		}
-		
-		if(this.topic.equals("biking"))
-		{
-			if(userInput.equals("mountain biking"))
-			{
-				topicCounter++;
-			}
-			else if(userInput.equals("lets talk about something else") || userInput.equals("lets change the topic") || userInput.equals("change the topic"))
-			{
-				responce = "OK. What do you want to talk about?";
-				this.topic = "none";
-				topicCounter = 0;
-			}
-		}
-		
-		
-		
-		
-		return responder;
-	}
 	/**
 	 * picks a random item from a list.
 	 * @param sourceList the list to pick from
@@ -557,9 +306,21 @@ public class BotAI
 		
 	}
 	
-
-	
+	//getters
+	public String getBotName()
+	{
 		
+		return botName;
+		
+	}
+	/**
+	 * returns the chatCount to the BotAppController
+	 * @return chatCount
+	 */
+	public int getChatCount()
+	{
+		return chatCount;
+	}
 	
 	
 }
