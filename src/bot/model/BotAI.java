@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- * @version 1.5 10/13/14
+ * @version 1.6 10/13/14
  */
 public class BotAI
 {
@@ -77,6 +77,8 @@ public class BotAI
 	private String content;
 	
 	private ChatbotUser user;
+	
+	private String lastQuestion;
 	
 	//constructor section:
 	/**
@@ -174,13 +176,18 @@ public class BotAI
 		
 	}
 	
-		/**
-		 * returns the botName to the BotAppController
-		 * @return botName
-		 */
 		
 	
 	//method section:
+	
+	public String processText(String userInput)
+	{
+		responce = "";
+		
+		 int options = (int) Math.random() * 5;
+		
+		return responce;
+	}
 	
 	/**
 	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. 
@@ -208,16 +215,77 @@ public class BotAI
 			else
 			{
 				responce = topicMentioned(topic);
+				topicCounter = 0;
 			}
 		
 			
 		}
-		
+		else if(!topic.equals("") && getChatCount() >= 5)
+		{
+			responce = topicResponce(userInput);
+			topicCounter = topicCounter++;
+		}
 		
 		updateChatCount();
 		return responce;
 	}
 	
+	private String topicResponce(String userInput) 
+	{
+		String chosenResponce = "";
+		
+		//if the topic is destiny
+		if(topic.equals("destiny"))
+		{
+			if(lastQuestion.equals("class"))
+			{
+				if(userInput.contains("warlock"))
+				{
+					chosenResponce = "COOL! thats my favorite class! what is your favorite planet?";
+					lastQuestion = "planet";
+				}
+				else if(userInput.contains("titan"))
+				{
+					chosenResponce = "Nice. my brother uses that class! Whats your favorite planet?";
+					lastQuestion = "planet";
+				}
+				else if(userInput.contains("hunter"))
+				{
+					chosenResponce = "ok. I have never used that class. Whats your favorite panet?";
+					lastQuestion = "planet";
+				}
+			}
+			if(lastQuestion.equals("planet"))
+			{
+				if(userInput.contains("mars"))
+				{
+					chosenResponce = "Mars is fun, but hard. what level are you?";
+					lastQuestion = "level";
+				}
+				if(userInput.contains("venus"))
+				{
+					chosenResponce = "Venus is too short. What level are you?";
+					lastQuestion = "level";
+				}
+				if(userInput.contains("earth"))
+				{
+					chosenResponce = "Earth is to easy XD. What level are you?";
+					lastQuestion = "level";
+				}
+				if(userInput.contains("moon"))
+				{
+					chosenResponce = "The moon is my favorite! What level are you?";
+					lastQuestion = "level";
+				}
+			}
+			else if(lastQuestion.equals("level"))
+			{
+				
+			}
+		}
+		
+		return chosenResponce;
+	}
 	private String topicMentioned(String topic) 
 	{
 		String chosenResponce = "";
@@ -225,22 +293,27 @@ public class BotAI
 		if(topic.equals("destiny"))
 		{
 			chosenResponce = "I love destiny! what class are you?";
+			lastQuestion = "class";
 		}
 		else if(topic.equals("biking"))
 		{
 			chosenResponce = "I love biking! do you road bike or mountain bike?";
+			lastQuestion = "bikeType";
 		}
 		else if(topic.equals("computers"))
 		{
 			chosenResponce = "Really? are you mac or pc?";
+			lastQuestion = "mac vs. pc";
 		}
 		else if(topic.equals("lotr") || topic.equals("lord of the rings"))
 		{
 			chosenResponce = "LOTR IS MY FAVORITE! Who is your favorite member of the felloship?";
+			lastQuestion = "fellowship";
 		}
 		else if(topic.equals("dungeons and dragons") || topic.equals("d&d") || topic.equals("d and d"))
 		{
 			chosenResponce = "I love d&d! What is your prefered race?";
+			lastQuestion = "d&d race";
 		}
 		
 		return chosenResponce;
