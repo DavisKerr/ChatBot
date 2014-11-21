@@ -37,7 +37,7 @@ public class BotAppController
 		theUser = new ChatbotUser();
 		appFrame = new ChatbotFrame(this); // passes a reference of the controller to the frame, so the GUI can pass on data back.
 		appView = new BotView();
-		appAI = new BotAI("ChatBot", "happy", "intro", this.theUser);
+		appAI = new BotAI("ChatBot", "happy", "", this.theUser);
 	}
 	
 	// method section:

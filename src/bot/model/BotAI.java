@@ -160,10 +160,17 @@ public class BotAI
 	private void fillTopicList()
 	{
 		topicList.add("destiny");
+		
 		topicList.add("biking");
-		topicList.add("sad");
+		
+		topicList.add("computers");
+		
 		topicList.add("lotr");
-		topicList.add("none");
+		topicList.add("lord of the rings");
+		
+		topicList.add("dungeons and dragons");
+		topicList.add("d&d");
+		topicList.add("d and d");
 		
 	}
 	
@@ -186,12 +193,58 @@ public class BotAI
 		
 		if(chatCount < 5)
 		{
+			topic = "introductions";
 			responce = introductions(userInput);
 		}
-	updateChatCount();
+		if (topic.equals("") && getChatCount() >= 5)
+		{
+			
+			topic = checkTopic(userInput);
+			
+			if(topic.equalsIgnoreCase(""))
+			{
+				responce = "I dont know anything about that. Can you choose anouther topic?";
+			}
+			else
+			{
+				responce = topicMentioned(topic);
+			}
+		
+			
+		}
+		
+		
+		updateChatCount();
 		return responce;
 	}
 	
+	private String topicMentioned(String topic) 
+	{
+		String chosenResponce = "";
+		
+		if(topic.equals("destiny"))
+		{
+			chosenResponce = "I love destiny! what class are you?";
+		}
+		else if(topic.equals("biking"))
+		{
+			chosenResponce = "I love biking! do you road bike or mountain bike?";
+		}
+		else if(topic.equals("computers"))
+		{
+			chosenResponce = "Really? are you mac or pc?";
+		}
+		else if(topic.equals("lotr") || topic.equals("lord of the rings"))
+		{
+			chosenResponce = "LOTR IS MY FAVORITE! Who is your favorite member of the felloship?";
+		}
+		else if(topic.equals("dungeons and dragons") || topic.equals("d&d") || topic.equals("d and d"))
+		{
+			chosenResponce = "I love d&d! What is your prefered race?";
+		}
+		
+		return chosenResponce;
+	}
 	private String introductions(String userInput)
 	{
 		responce = "";
@@ -221,17 +274,9 @@ public class BotAI
 		{
 			user.setFavoriteFood(userInput);
 			responce = "Awesome! I have always wanted to try " + user.getFavoriteFood() + ", but computers cant eat food :( So, do you have a specific thing you want to talk about?";
+			topic = "";
 		}
-		else if(getChatCount() == 5)
-		{
-			topic = checkTopic(userInput);
-			
-			if(topic.equals(""))
-			{
-				this.chatCount = 4;
-			}
-			
-		}
+		
 		
 		return responce;		
 	}
@@ -243,7 +288,7 @@ public class BotAI
 		for(String currentMeme : topicList)
 		{
 			
-			if(userInput.equalsIgnoreCase(currentMeme))
+			if(userInput.equalsIgnoreCase(currentMeme) || userInput.contains(currentMeme))
 			{
 				isATopic = true;
 				chosenTopic = currentMeme;
