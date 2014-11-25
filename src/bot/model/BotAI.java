@@ -214,6 +214,7 @@ public class BotAI
 			}
 			else
 			{
+				
 				responce = topicMentioned(topic);
 				topicCounter = 0;
 			}
@@ -222,8 +223,17 @@ public class BotAI
 		}
 		else if(!topic.equals("") && getChatCount() >= 5)
 		{
-			responce = topicResponce(userInput);
-			topicCounter = topicCounter++;
+			if(!lastQuestion.equals("Change topic"))
+			{
+				responce = topicResponce(userInput);
+				topicCounter = topicCounter++;
+			}
+			else
+			{
+				responce = "I have talked about that too much. choose a different topic.";
+				topic = "";
+			}
+			
 		}
 		
 		updateChatCount();
@@ -280,7 +290,40 @@ public class BotAI
 			}
 			else if(lastQuestion.equals("level"))
 			{
-				
+				int level = 0; 
+				try
+				{
+					level = Integer.parseInt(userInput);
+				}
+				catch(Exception generalException)
+				{
+					JOptionPane.showMessageDialog(null, "Please only answer in numbers.");
+				}
+				if(level <= 0)
+				{
+					responce = "Liar. You must not play destiny!";
+					lastQuestion = "Change topic";
+				}
+				else if(level <= 10)
+				{
+					responce = "Thats not very high...";
+					lastQuestion = "Change topic";
+				}
+				else if(level <= 20)
+				{
+					responce = "Your almost to level 20! Keep pushing!";
+					lastQuestion = "Change topic";
+				}
+				else if(level <= 30)
+				{
+					responce = "your super good!";
+					lastQuestion = "Change topic";
+				}
+				else
+				{
+					responce = "Liar. thats not even possible!";
+					lastQuestion = "Change topic";
+				}
 			}
 		}
 		
