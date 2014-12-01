@@ -90,6 +90,10 @@ public class BotAppController
 	{
 		
 		responce = appAI.BotReply(input);
+		if(responce.equals("quiting"))
+		{
+			quit();
+		}
 		return responce;
 		
 	}

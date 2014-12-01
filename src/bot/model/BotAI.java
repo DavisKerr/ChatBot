@@ -226,7 +226,6 @@ public class BotAI
 			if(!lastQuestion.equals("Change topic"))
 			{
 				responce = topicResponce(userInput);
-				topicCounter = topicCounter++;
 			}
 			else
 			{
@@ -235,7 +234,10 @@ public class BotAI
 			}
 			
 		}
-		
+		if(quitChecker(userInput))
+		{
+			responce = "quiting";
+		}
 		updateChatCount();
 		return responce;
 	}
@@ -326,10 +328,88 @@ public class BotAI
 				}
 			}
 		}
+		else if(topic.equals("biking"))
+		{
+			if(lastQuestion.equals("bikeType"))
+			{
+				if(userInput.contains("mountain"))
+				{
+					
+					responce = "cool,  do you wear a helmet?";
+					lastQuestion = "helmet?";
+					
+				}
+				else if(userInput.contains("road"))
+				{
+					responce = "cool, " + user.getName() + ". Do you wear a helmet?";
+					lastQuestion = "helmet?";
+				}
+				else
+				{
+					responce = "I dont think thats a type of biking, but ok... Do you wear a helmet?";
+					lastQuestion = "helmet?";
+				}
+			}
+			
+			else if(lastQuestion.equals("helmet?"))
+			{
+				if(userInput.contains("yes"))
+				{
+					responce = "Good. Do you have a nice bike?";
+					lastQuestion = "nice bike";
+				}
+				else
+				{
+					responce = "YOU DONT!?!?!?!?!?!?! YOU SHOULD! YOUR NOT A BIKER!";
+					lastQuestion = "Change topic";
+				}
+			}
+			else if(lastQuestion.equals("nice bike"))
+			{
+				if(userInput.contains("yes"))
+				{
+					responce = "Sweet! I do too!";
+					topic = "Change topic";
+				}
+				else if(userInput.contains("no"))
+				{
+					responce = "Sad :'(";
+					lastQuestion = "Change topic";
+				}
+				else
+				{
+					responce = "Fine, dont tell me.";
+					lastQuestion = "Change topic";
+				}
+			}
+		}
+		else if(topic.equalsIgnoreCase("computers"))
+		{
+			if(userInput.equals("pc"))
+			{
+				responce = "Yay, I do too! Do you code?";
+				lastQuestion = "code";
+			}
+			else if(userInput.equals("mac"))
+			{
+				responce = "I guess thats ok... do you code?";
+				lastQuestion = "code";
+			}
+		}
+		else if(topic.equals("lotr") || topic.equals("lord of the rings"))
+		{
+			
+		}
+		else if(topic.equals("dungeons and dragons") || topic.equals("d&d") || topic.equals("d and d"))
+		{
+			
+		}
 		
 		return chosenResponce;
 	}
-	private String topicMentioned(String topic) 
+	
+	
+	private String topicMentioned(String topic) //topic checker
 	{
 		String chosenResponce = "";
 		
@@ -338,7 +418,7 @@ public class BotAI
 			chosenResponce = "I love destiny! what class are you?";
 			lastQuestion = "class";
 		}
-		else if(topic.equals("biking"))
+		else if(topic.equals("biking")) 
 		{
 			chosenResponce = "I love biking! do you road bike or mountain bike?";
 			lastQuestion = "bikeType";
@@ -361,7 +441,7 @@ public class BotAI
 		
 		return chosenResponce;
 	}
-	private String introductions(String userInput)
+	private String introductions(String userInput) //Introductions
 	{
 		responce = "";
 		
@@ -397,7 +477,7 @@ public class BotAI
 		return responce;		
 	}
 	
-	private String checkTopic(String userInput)
+	private String checkTopic(String userInput) //content Checker
 	{
 		String chosenTopic = "";
 		boolean isATopic = false;
@@ -430,7 +510,7 @@ public class BotAI
 	 * @param input what the user said
 	 * @return isAMeme can be true or false
 	 */
-	private boolean memeChecker(String input)
+	private boolean memeChecker(String input)//memeChecker
 	{
 		boolean isAMeme = false;
 		
@@ -482,13 +562,19 @@ public class BotAI
 	
 	/**
 	 * tells the program to quit.
+	 * @param userInput 
 	 * @return the value of quiting
 	 */
-	public boolean runQuitSequence()
+	public boolean quitChecker(String userInput) //quit checker
 	{
+		quiting = false;
+		
+		if(userInput.equals("quit") || userInput.equals("quiting") || userInput.equals("i want to quit")) 
+		{
+			quiting = true;
+		}
 		
 		return quiting;
-		
 	}
 	
 	//getters
