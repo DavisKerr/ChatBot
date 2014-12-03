@@ -34,51 +34,12 @@ public class BotAI
 	 * What the computer types in.
 	 */
 	private String responce;
-	/**
-	 * What the current topic is.
-	 */
 	private String topic;
-	/**
-	 * The name of the chatBot.
-	 */
 	private String botName;
-	/**
-	 * The Chatbot's favorite color.
-	 */
-	@SuppressWarnings("unused")
-	private String botFavColor;
-	/**
-	 * How many messages the user has sent.
-	 */
 	private int chatCount;
-	/**
-	 * The name of the user.
-	 */
-	private String userName;
-	/**
-	 * what the last responce was.
-	 */
-	private String lastResponce;
-	/**
-	 * What the chatbot's mood is.
-	 */
-	private String mood;
-	/**
-	 * Tells the computer if the user wants to quit.
-	 */
 	public boolean quiting;
-	/**
-	 * How long a topic has been discussed.
-	 */
-	private int topicCounter;
-	/**
-	 * to be added.
-	 */
-	private String content;
-	
 	private ChatbotUser user;
 	
-	private String lastQuestion;
 	
 	//constructor section:
 	/**
@@ -86,7 +47,7 @@ public class BotAI
 	 * Finds creates the bot's name to be used throughout the program. 
 	 * @param botName Creates the bot with an AI
 	 */
-	public BotAI(String botName, String mood, String topic, ChatbotUser user)
+	public BotAI(String botName, ChatbotUser user)
 	{
 		this.user = user;
 		this.topic = topic;
@@ -94,7 +55,6 @@ public class BotAI
 		topicList = new ArrayList<String>();
 		userInputList = new ArrayList<String>();
 		this.botName = botName;
-		this.mood = mood;
 		chatCount = 0;
 		fillMemeList();
 		fillTopicList();
@@ -162,17 +122,26 @@ public class BotAI
 	private void fillTopicList()
 	{
 		topicList.add("destiny");
-		
 		topicList.add("biking");
-		
 		topicList.add("computers");
-		
 		topicList.add("lotr");
 		topicList.add("lord of the rings");
-		
 		topicList.add("dungeons and dragons");
-		topicList.add("d&d");
-		topicList.add("d and d");
+		topicList.add("trains");
+		topicList.add("Pie");
+		topicList.add("Cheese");
+		topicList.add("Halo 4");
+		topicList.add("Markers");
+		topicList.add("Planes");
+		topicList.add("ninjas");
+		topicList.add("bananas");
+		topicList.add("fire");
+		topicList.add("space");
+		topicList.add("dragons");
+		topicList.add("moon");
+		topicList.add("pizza");
+		topicList.add("candy");
+		topicList.add("christmas");
 		
 	}
 	
@@ -182,265 +151,118 @@ public class BotAI
 	
 	public String processText(String userInput)
 	{
-		responce = "";
-		
-		 int options = (int) Math.random() * 5;
-		
-		return responce;
-	}
-	
-	/**
-	 * The method that collects the input given in the ContinueConversation method in the BotView class. It then sets the responce based on the input. 
-	 * @param userInput Uses the input provided in BotView.
-	 */
-	public String BotReply(String userInput)
-	{
-		this.userInput = userInput;
-		userInputList.add(userInput);
+		responce = "Why?";
 		
 		if(chatCount < 5)
 		{
 			topic = "introductions";
 			responce = introductions(userInput);
 		}
-		if (topic.equals("") && getChatCount() >= 5)
+		else
 		{
-			
-			topic = checkTopic(userInput);
-			
-			if(topic.equalsIgnoreCase(""))
-			{
-				responce = "I dont know anything about that. Can you choose anouther topic?";
-			}
-			else
-			{
-				
-				responce = topicMentioned(topic);
-				topicCounter = 0;
-			}
+			 int options = (int) (Math.random() * 5);
+			 
+			 if(options == 0)
+			 {
+				 if(checkTopic(userInput))
+				 {
+					 responce = "Cool! I like talking about " + topic + "! Whats your favorite part of " + topic + "?";
+					 
+				 }
+				 else
+				 {
+					 responce = "I dont really want to talk about that. What do you want to talk about?";
+				 }
+			 }
+			 else if(options == 1)
+			 {
+				 if(memeChecker(userInput))
+				 {
+					 responce = "Thats interesting. Are you sure?";
+				 }
+				 else
+				 {
+					 responce = "Wow! I never thought you would say that! Do you have anything else to add?";
+				 }
+			 }
+			 else if(options == 2)
+			 {
+				 responce = askQuestion(userInput);
+			 }
+			 else if(options == 3)
+			 {
+				 responce = changeTopic(topicList);
+			 }
+			 else if(options == 4)
+			 {
+				 responce = "I think I will make you " + user.getFavoriteFood() + " to eat.";
+			 }
+			 else if(options == 5)
+			 {
+				 responce = "I think you are being mean... SAY SORRY!!!";
+			 }
+		}
 		
-			
-		}
-		else if(!topic.equals("") && getChatCount() >= 5)
-		{
-			if(!lastQuestion.equals("Change topic"))
+		
+		 if(quitChecker(userInput))
 			{
-				responce = topicResponce(userInput);
+				responce = "quiting";
 			}
-			else
-			{
-				responce = "I have talked about that too much. choose a different topic.";
-				topic = "";
-			}
-			
-		}
-		if(quitChecker(userInput))
-		{
-			responce = "quiting";
-		}
+		 
 		updateChatCount();
 		return responce;
 	}
 	
-	private String topicResponce(String userInput) 
+	private String askQuestion(String userInput) 
 	{
-		String chosenResponce = "";
+		String responce = "";
 		
-		//if the topic is destiny
-		if(topic.equals("destiny"))
+		 int options = (int) (Math.random() * 5);
+		 if(options == 0)
+		 {
+			 responce = "I just fell asleep while you were talking. Can you say that again?";
+		 }
+		 else if(options == 1)
+		 {
+			 responce = "Im bored. Say something entertaining?";
+		 }
+		 else if(options == 2)
+		 {
+			 responce = "Interesting. Tell me more.";
+		 }
+		 else if(options == 3)
+		 {
+			 if(user.getAge() <= 15)
+			 {
+				 responce = "Hey, your really young. Why dont you go play outside?";
+			 }
+			 else
+			 {
+				 responce = "Your old enough to understand that Im a robot, not a person, right?";
+			 }
+		 }
+		 else if(options == 4)
+		 {
+			 responce = "Whats wrong with you, " + user.getName();
+		 }
+		 else 
+		 {
+			 responce = "Wait. I just fell down the stairs." + user.getName() + ", can you call an ambulence?";
+		 }
+		return responce;
+	}
+	private boolean mashChecker(String userInput)
+	{
+		boolean isMashing = false;
+		
+		if(userInput.indexOf("sdf") == -1)
 		{
-			if(lastQuestion.equals("class"))
-			{
-				if(userInput.contains("warlock"))
-				{
-					chosenResponce = "COOL! thats my favorite class! what is your favorite planet?";
-					lastQuestion = "planet";
-				}
-				else if(userInput.contains("titan"))
-				{
-					chosenResponce = "Nice. my brother uses that class! Whats your favorite planet?";
-					lastQuestion = "planet";
-				}
-				else if(userInput.contains("hunter"))
-				{
-					chosenResponce = "ok. I have never used that class. Whats your favorite panet?";
-					lastQuestion = "planet";
-				}
-			}
-			if(lastQuestion.equals("planet"))
-			{
-				if(userInput.contains("mars"))
-				{
-					chosenResponce = "Mars is fun, but hard. what level are you?";
-					lastQuestion = "level";
-				}
-				if(userInput.contains("venus"))
-				{
-					chosenResponce = "Venus is too short. What level are you?";
-					lastQuestion = "level";
-				}
-				if(userInput.contains("earth"))
-				{
-					chosenResponce = "Earth is to easy XD. What level are you?";
-					lastQuestion = "level";
-				}
-				if(userInput.contains("moon"))
-				{
-					chosenResponce = "The moon is my favorite! What level are you?";
-					lastQuestion = "level";
-				}
-			}
-			else if(lastQuestion.equals("level"))
-			{
-				int level = 0; 
-				try
-				{
-					level = Integer.parseInt(userInput);
-				}
-				catch(Exception generalException)
-				{
-					JOptionPane.showMessageDialog(null, "Please only answer in numbers.");
-				}
-				if(level <= 0)
-				{
-					responce = "Liar. You must not play destiny!";
-					lastQuestion = "Change topic";
-				}
-				else if(level <= 10)
-				{
-					responce = "Thats not very high...";
-					lastQuestion = "Change topic";
-				}
-				else if(level <= 20)
-				{
-					responce = "Your almost to level 20! Keep pushing!";
-					lastQuestion = "Change topic";
-				}
-				else if(level <= 30)
-				{
-					responce = "your super good!";
-					lastQuestion = "Change topic";
-				}
-				else
-				{
-					responce = "Liar. thats not even possible!";
-					lastQuestion = "Change topic";
-				}
-			}
-		}
-		else if(topic.equals("biking"))
-		{
-			if(lastQuestion.equals("bikeType"))
-			{
-				if(userInput.contains("mountain"))
-				{
-					
-					responce = "cool,  do you wear a helmet?";
-					lastQuestion = "helmet?";
-					
-				}
-				else if(userInput.contains("road"))
-				{
-					responce = "cool, " + user.getName() + ". Do you wear a helmet?";
-					lastQuestion = "helmet?";
-				}
-				else
-				{
-					responce = "I dont think thats a type of biking, but ok... Do you wear a helmet?";
-					lastQuestion = "helmet?";
-				}
-			}
-			
-			else if(lastQuestion.equals("helmet?"))
-			{
-				if(userInput.contains("yes"))
-				{
-					responce = "Good. Do you have a nice bike?";
-					lastQuestion = "nice bike";
-				}
-				else
-				{
-					responce = "YOU DONT!?!?!?!?!?!?! YOU SHOULD! YOUR NOT A BIKER!";
-					lastQuestion = "Change topic";
-				}
-			}
-			else if(lastQuestion.equals("nice bike"))
-			{
-				if(userInput.contains("yes"))
-				{
-					responce = "Sweet! I do too!";
-					topic = "Change topic";
-				}
-				else if(userInput.contains("no"))
-				{
-					responce = "Sad :'(";
-					lastQuestion = "Change topic";
-				}
-				else
-				{
-					responce = "Fine, dont tell me.";
-					lastQuestion = "Change topic";
-				}
-			}
-		}
-		else if(topic.equalsIgnoreCase("computers"))
-		{
-			if(userInput.equals("pc"))
-			{
-				responce = "Yay, I do too! Do you code?";
-				lastQuestion = "code";
-			}
-			else if(userInput.equals("mac"))
-			{
-				responce = "I guess thats ok... do you code?";
-				lastQuestion = "code";
-			}
-		}
-		else if(topic.equals("lotr") || topic.equals("lord of the rings"))
-		{
-			
-		}
-		else if(topic.equals("dungeons and dragons") || topic.equals("d&d") || topic.equals("d and d"))
-		{
-			
+			isMashing = true;
 		}
 		
-		return chosenResponce;
+		return isMashing;
 	}
 	
-	
-	private String topicMentioned(String topic) //topic checker
-	{
-		String chosenResponce = "";
-		
-		if(topic.equals("destiny"))
-		{
-			chosenResponce = "I love destiny! what class are you?";
-			lastQuestion = "class";
-		}
-		else if(topic.equals("biking")) 
-		{
-			chosenResponce = "I love biking! do you road bike or mountain bike?";
-			lastQuestion = "bikeType";
-		}
-		else if(topic.equals("computers"))
-		{
-			chosenResponce = "Really? are you mac or pc?";
-			lastQuestion = "mac vs. pc";
-		}
-		else if(topic.equals("lotr") || topic.equals("lord of the rings"))
-		{
-			chosenResponce = "LOTR IS MY FAVORITE! Who is your favorite member of the felloship?";
-			lastQuestion = "fellowship";
-		}
-		else if(topic.equals("dungeons and dragons") || topic.equals("d&d") || topic.equals("d and d"))
-		{
-			chosenResponce = "I love d&d! What is your prefered race?";
-			lastQuestion = "d&d race";
-		}
-		
-		return chosenResponce;
-	}
 	private String introductions(String userInput) //Introductions
 	{
 		responce = "";
@@ -477,9 +299,8 @@ public class BotAI
 		return responce;		
 	}
 	
-	private String checkTopic(String userInput) //content Checker
+	private boolean checkTopic(String userInput) //content Checker
 	{
-		String chosenTopic = "";
 		boolean isATopic = false;
 		for(String currentMeme : topicList)
 		{
@@ -487,12 +308,12 @@ public class BotAI
 			if(userInput.equalsIgnoreCase(currentMeme) || userInput.contains(currentMeme))
 			{
 				isATopic = true;
-				chosenTopic = currentMeme;
+				topic = currentMeme;
 			}
 			
 		}
 		
-		return chosenTopic;
+		return isATopic;
 	}
 	
 	/**
