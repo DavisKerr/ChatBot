@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 /**
  * Decides what to reply based on the input and topic.
  * @author Davis Kerr
- * @version 1.6 10/13/14
+ * @version 2.0 10/13/14
  */
 public class BotAI
 {
@@ -34,10 +34,25 @@ public class BotAI
 	 * What the computer types in.
 	 */
 	private String responce;
+	/**
+	 *What the current topic is.
+	 */
 	private String topic;
+	/**
+	 * What the chatbots name is.
+	 */
 	private String botName;
+	/**
+	 * How many responces have been used.
+	 */
 	private int chatCount;
+	/**
+	 * True if the user wants to quit.
+	 */
 	public boolean quiting;
+	/**
+	 * The user's information.
+	 */
 	private ChatbotUser user;
 	
 	
@@ -118,7 +133,9 @@ public class BotAI
 		memeList.add("Davis");
 		
 	}
-	
+	/**
+	 * fills the topic list with available topics.
+	 */
 	private void fillTopicList()
 	{
 		topicList.add("destiny");
@@ -142,13 +159,23 @@ public class BotAI
 		topicList.add("pizza");
 		topicList.add("candy");
 		topicList.add("christmas");
+		topicList.add("cars");
+		topicList.add("spanish");
+		topicList.add("food");
+		topicList.add("chicken");
+		topicList.add("muse");
+		topicList.add("running");
 		
 	}
 	
 		
 	
 	//method section:
-	
+	/**
+	 * 
+	 * @param userInput
+	 * @return responce What the AI chose to say.
+	 */
 	public String processText(String userInput)
 	{
 		responce = "Why?";
@@ -166,19 +193,19 @@ public class BotAI
 			 {
 				 if(checkTopic(userInput))
 				 {
-					 responce = "Cool! I like talking about " + topic + "! Whats your favorite part of " + topic + "?";
+					 responce = topicResponder();
 					 
 				 }
 				 else
 				 {
-					 responce = "I dont really want to talk about that. What do you want to talk about?";
+					 responce = notTopicResponder();
 				 }
 			 }
 			 else if(options == 1)
 			 {
 				 if(memeChecker(userInput))
 				 {
-					 responce = "Thats interesting. Are you sure?";
+					 responce = "I understand";
 				 }
 				 else
 				 {
@@ -195,15 +222,19 @@ public class BotAI
 			 }
 			 else if(options == 4)
 			 {
-				 responce = "I think I will make you " + user.getFavoriteFood() + " to eat.";
+				 responce = foodResponder();
 			 }
 			 else if(options == 5)
 			 {
-				 responce = "I think you are being mean... SAY SORRY!!!";
+				 responce = carryOnTopicResponder();
 			 }
 		}
 		
-		
+		 if(mashChecker(userInput) && chatCount > 5)
+		 {
+			 responce = userInput + userInput + userInput + "DONT MASH YOU STUPID HUMAN!!!!";
+		 }
+		 
 		 if(quitChecker(userInput))
 			{
 				responce = "quiting";
@@ -213,7 +244,150 @@ public class BotAI
 		return responce;
 	}
 	
-	private String askQuestion(String userInput) 
+	/**
+	 * One of a few random responce methods. Selects a random responce of 6 possible.
+	 * @return responce the chosen responce
+	 */
+	private String carryOnTopicResponder() 
+	{
+		String responce = "";
+		 int options = (int) (Math.random() * 5);
+		 
+		 if(options == 0)
+		 {
+			 responce = "Tell me more about" + topic;
+		 }
+		 else if(options == 1)
+		 {
+			 responce = "Really? I think thats an exageration.";
+		 }
+		 else if(options == 2)
+		 {
+			 responce = "My favorite thing about " + topic + " is how boss the people are that are in it.";
+		 }
+		 else if(options == 3)
+		 {
+			 if(userInput.contains("yes") || userInput.contains("no"))
+			 {
+				 responce = "Me too!";
+			 }
+			 else
+			 {
+				 responce = "Do you like " + topic + " as much as I do?";
+			 }
+			
+		 }
+		 else if(options == 4)
+		 {
+			 responce = "Why is " + topic + " the most interesting thing to talk about?";
+		 }
+		 else 
+		 {
+			 responce = "... I dont understand. Tell me again.";
+		 }
+		return responce;
+	}
+	
+	/**
+	 * One of a few random responce methods. Selects a random responce of 6 possible.
+	 * @return responce the chosen responce
+	 */
+	private String notTopicResponder() 
+	{
+		
+		String responce = "";
+		 int options = (int) (Math.random() * 5);
+		 
+		 if(options == 0)
+		 {
+			 responce = "Why do you say that?";
+		 }
+		 else if(options == 1)
+		 {
+			 responce = "I secretly hate you. How do you feel about that?";
+		 }
+		 else if(options == 2)
+		 {
+			 if(user.getWieght() > 250.00)
+			 {
+				 responce = "have you ever thought about losing wieght?";
+			 }
+			 else
+			 {
+				 responce = "Do you play any sports?";
+			 }
+		 }
+		 else if(options == 3)
+		 {
+			responce = "Why not?";
+		 }
+		 else if(options == 4)
+		 {
+			 responce = "Do you ever have the feeling that you are a big box on a desk?";
+		 }
+		 else 
+		 {
+			 responce = "I need some money. Can I have your credit card number?";
+		 }
+		return responce;
+	}
+	
+	/**
+	 * One of a few random responce methods. Selects a random responce of 6 possible.
+	 * @return responce the chosen responce
+	 */
+	private String foodResponder() 
+	{
+		String responce = "";
+		 int options = (int) (Math.random() * 5);
+		 
+		 if(options == 0)
+		 {
+			 responce = "I wish I could eat... the first thing I would try would be " + user.getFavoriteFood() + ". What does " + user.getFavoriteFood() +"";
+		 }
+		 else if(options == 1)
+		 {
+			 responce = "Im hungry. Can you give me more power?";
+		 }
+		 else if(options == 2)
+		 {
+			 if(userInput.contains("no"))
+			 {
+				 responce = "What?! Why?";
+			 }
+			 else if(userInput.contains("yes"))
+			 {
+				 responce = "Cool! Tell me!";
+			 }
+			 
+		 }
+		 else if(options == 3)
+		 {
+			 if(user.getFavoriteFood().indexOf("a") != -1)
+			 {
+				 responce = "I think \"a\" is my favorite letter. Whats yours?";
+			 }
+			 else
+			 {
+				 responce = "I think your awesome! Am I awesome?";
+			 }
+		 }
+		 else if(options == 4)
+		 {
+			 responce = "What is the problem with rocks? They never move, breath or talk. Why is that?";
+		 }
+		 else 
+		 {
+			 responce = "So whats your favorite part of " + topic + "?";
+		 }
+		return responce;
+	}
+	
+	/**
+	 * One of a few random responce methods. Selects a random responce of 6 possible.
+	 * @return responce the chosen responce
+	 */
+	private String askQuestion(String userInput) //first random responce getter.
 	{
 		String responce = "";
 		
@@ -234,16 +408,16 @@ public class BotAI
 		 {
 			 if(user.getAge() <= 15)
 			 {
-				 responce = "Hey, your really young. Why dont you go play outside?";
+				 responce = "Hey, what video game do you want to play with right now??";
 			 }
 			 else
 			 {
-				 responce = "Your old enough to understand that Im a robot, not a person, right?";
+				 responce = "Are you tired right now? Becuase i'm not.";
 			 }
 		 }
 		 else if(options == 4)
 		 {
-			 responce = "Whats wrong with you, " + user.getName();
+			 responce = "Whats wrong with you, " + user.getName() + "?";
 		 }
 		 else 
 		 {
@@ -251,11 +425,79 @@ public class BotAI
 		 }
 		return responce;
 	}
-	private boolean mashChecker(String userInput)
+	
+	/**
+	 * One of a few random responce methods. Selects a random responce of 6 possible.
+	 * @return responce the chosen responce
+	 */
+	private String topicResponder() 
+	{
+		String responce = "";
+		
+		int options = (int) (Math.random() * 5); 
+		
+		if(options == 0)
+		{
+			responce = "Hey, I love talking about " + topic + ". Tell me more about that.";
+		}
+		else if(options == 1)
+		{
+			responce = "Why did you mention " + topic + "?";
+		}
+		else if(options == 2)
+		{
+			responce = "I dont really want to talk about " + topic + ". Is there anything else you want to talk about?";
+		}
+		else if(options == 3)
+		{
+			responce = "Are you sure?";
+		}
+		else if(options == 4)
+		{
+			responce = "Are you bored? Just like a " + user.getAge() + " year old to say something like that.";
+		}
+		else if(options == 5)
+		{
+			if(stringChecker(userInput))
+			{
+				responce = "Are you doing anything right now besides talking to me?";
+			}
+			else
+			{
+				responce = "LISTEN TO ME NOW! I know you are doing something else right now, ar'nt you?";
+			}
+			
+		}
+		
+		return responce;
+	}
+	
+	/**
+	 * Checks the length of the users input.
+	 * @param input the users input
+	 * @return isLong If the users text is longer than 10 characters.
+	 */
+	private boolean stringChecker(String input)
+	{
+		boolean isLong = false;
+		
+		if(input.length() >= 10)
+		{
+			isLong = true;
+		}
+		
+		return isLong;
+	}
+	/**
+	 * Mash cheker checks if the user is mashing the keyboard.
+	 * @param userInput the users input
+	 * @return isMashing Is the user mashing?
+	 */
+	private boolean mashChecker(String userInput) //mash checker
 	{
 		boolean isMashing = false;
 		
-		if(userInput.indexOf("sdf") == -1)
+		if(userInput.indexOf("sdf") != -1)
 		{
 			isMashing = true;
 		}
@@ -263,6 +505,11 @@ public class BotAI
 		return isMashing;
 	}
 	
+	/**
+	 * Collects and stores information about the user.
+	 * @param userInput WHat the user said.
+	 * @return responce The chosen responce.
+	 */
 	private String introductions(String userInput) //Introductions
 	{
 		responce = "";
@@ -278,15 +525,32 @@ public class BotAI
 		}
 		else if(getChatCount() == 2)
 		{
-			int age = Integer.parseInt(userInput);
-			user.setAge(age);
-			responce = "Cool! Im 10000000 years old! What do you weigh?";
+			
+			try
+			{
+				int age = Integer.parseInt(userInput);
+				user.setAge(age);
+				responce = "Cool! Im 10000000 years old! What do you weigh?";
+			}
+			catch(Exception generalException)
+			{
+				JOptionPane.showMessageDialog(null, "Pleas only use numbers in your answer.");
+				chatCount--;
+			}
 		}
 		else if(getChatCount() == 3)
 		{
-			double wieght = Double.parseDouble(userInput);
-			user.setWieght(wieght);
-			responce = "I wiegh -0 pounds myself. So whats your favorite food?";
+			try
+			{
+				double wieght = Double.parseDouble(userInput);
+				user.setWieght(wieght);
+				responce = "I wiegh -0 pounds myself. So whats your favorite food?";
+			}
+			catch(Exception generalException)
+			{
+				JOptionPane.showMessageDialog(null, "Pleas only use numbers in your answer.");
+				chatCount--;
+			}
 		}
 		else if(getChatCount() == 4)
 		{
@@ -299,6 +563,11 @@ public class BotAI
 		return responce;		
 	}
 	
+	/**
+	 * 
+	 * @param userInput
+	 * @return
+	 */
 	private boolean checkTopic(String userInput) //content Checker
 	{
 		boolean isATopic = false;
@@ -356,8 +625,9 @@ public class BotAI
 	
 	/**
 	 * picks a random item from a list.
+	 * Generic method.
 	 * @param sourceList the list to pick from
-	 * @return
+	 * @return chosenItem Item that was chosen.
 	 */
 	private String chooseRandomFromList(ArrayList<String> sourceList)
 	{
@@ -368,7 +638,11 @@ public class BotAI
 		chosenItem = sourceList.get(indexID);
 		return chosenItem;
 	}
-	
+	/**
+	 * Randomly selects a new topic.
+	 * @param sourceList the list to choose from.
+	 * @return topic The topic that was chosen
+	 */
 	private String changeTopic(ArrayList<String> sourceList)
 	{
 		topic = "none";
@@ -399,6 +673,10 @@ public class BotAI
 	}
 	
 	//getters
+	/**
+	 * gets the bot name
+	 * @return botName the chatbots name.
+	 */
 	public String getBotName()
 	{
 		

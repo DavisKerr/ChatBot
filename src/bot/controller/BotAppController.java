@@ -18,14 +18,37 @@ public class BotAppController
 {
 
 	// variable declaration section:
+	/**
+	 * true if the program is running.
+	 */
 	private boolean isRunning;
+	/**
+	 * The basic popup window display.
+	 */
 	private BotView appView;
+	/**
+	 * The user's input.
+	 */
 	private String input;
+	/**
+	 * The AI for the chatbot.
+	 */
 	private BotAI appAI;
+	/**
+	 * What the computer types back.
+	 */
 	private String responce;
-	private String name;
+	/**
+	 * What the computer says when the program exits.
+	 */
 	private String closeMessage;
+	/**
+	 * The gui frame.
+	 */
 	private ChatbotFrame appFrame;
+	/**
+	 * Collects and holds the users data.
+	 */
 	private ChatbotUser theUser;
 	
 	// constructor section:
@@ -85,7 +108,11 @@ public class BotAppController
 		System.exit(0);
 		
 	}
-	
+	/**
+	 * Runs the processText() method to find a responce, and sends the chosen responce back.
+	 * @param input What the user typed in
+	 * @return responce What the computer types back.
+	 */
 	public String startProcess(String input)
 	{
 		

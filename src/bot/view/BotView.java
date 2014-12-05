@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 import bot.controller.BotAppController;
 
 /**
- * Displays all of the data for the entire program.
+ *  A file from an old version. unused now.
  * @author dker2024
- * @version 1 10/2/14
+ * @version 1.0 10/2/14
  */
 public class BotView
 {

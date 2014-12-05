@@ -25,23 +25,71 @@ import javax.swing.text.html.HTMLEditorKit;
 
 public class ChatbotPanel extends JPanel
 {
+	/**
+	 * The controller
+	 */
 	private BotAppController baseController;
+	/**
+	 * The button
+	 */
 	private JButton firstButton;
+	/**
+	 * The text field
+	 */
 	private JTextField firstTextField;
+	/**
+	 * The layout
+	 */
 	private SpringLayout baseLayout;
+	/**
+	 * The user's input.
+	 */
 	private String userInput;
+	/**
+	 * The users previous responces
+	 */
 	private JTextArea chatAreaUser;
+	/**
+	 * The scroll pane for chatAreaUser
+	 */
 	private JScrollPane chatPaneUser;
+	/**
+	 * The bot's previous responces
+	 */
 	private JTextArea chatAreaAi;
+	/**
+	 * the scroll pane for the chatAreaAi
+	 */
 	private JScrollPane chatPaneAi;
+	/**
+	 * The menu bar.
+	 */
 	private JMenuBar menuBar;
+	/**
+	 * The submenus
+	 */
 	private JMenu menu, submenu;
+	/**
+	 * The action submenus.
+	 */
 	private JMenu actionMenu, subMenu;
+	/**
+	 * menu item 1
+	 */
 	private JMenuItem menuItem;
+	/**
+	 * Menu item 2
+	 */
 	private JMenuItem menuItemFive;
+	/**
+	 * What to write.
+	 */
 	private String textToWrite;
 
-
+	/**
+	 * Constructs the panel and its elements.
+	 * @param baseController The controller
+	 */
 	public ChatbotPanel(BotAppController baseController)
 	{
 		this.baseController = baseController;
@@ -67,7 +115,9 @@ public class ChatbotPanel extends JPanel
 		setupListeners();
 	}
 	
-
+	/**
+	 * Sets up the panel by adding the elements in.
+	 */
 	private void setupPanel()
 	{
 
@@ -80,7 +130,10 @@ public class ChatbotPanel extends JPanel
 		this.add(menuBar);
 		this.add(chatPaneAi);
 	}
-
+	
+	/**
+	 * positions the elements in the panel.
+	 */
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.NORTH, chatPaneUser, 20, SpringLayout.SOUTH, menuBar);
@@ -101,7 +154,10 @@ public class ChatbotPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.NORTH, firstButton, 6, SpringLayout.SOUTH, firstTextField);
 		baseLayout.putConstraint(SpringLayout.SOUTH, firstButton, -150, SpringLayout.SOUTH, this);
 	}
-
+	
+	/**
+	 *Starts the listeners. 
+	 */
 	private void setupListeners()
 	{
 		
@@ -159,6 +215,9 @@ public class ChatbotPanel extends JPanel
 
 	}
 	
+	/**
+	 * Sets up the chat areas preferences.
+	 */
 	private void setupTextBox()
 	{
 		
@@ -172,6 +231,9 @@ public class ChatbotPanel extends JPanel
 
 	}
 	
+	/**
+	 * Sets up the menu.
+	 */
 	private void setupMenu()
 	{
 		
@@ -197,12 +259,20 @@ public class ChatbotPanel extends JPanel
 		
 	}
 	
+	/**
+	 * Returns the user input.
+	 * @param userInput the users input.
+	 * @return userInput.
+	 */
 	private String returnInput(String userInput)
 	{
 		this.userInput = userInput;
 		return userInput;
 	}
 	
+	/**
+	 * sends the text to the controller and AI to be processed.
+	 */
 	private void sendText()
 	{
 		
